@@ -1,0 +1,17 @@
+<advancedsettings>
+	<fullscreen>true</fullscreen>
+	
+	<musiclibrary>
+		<itemseparator>/</itemseparator>   
+	</musiclibrary>
+  
+	<video>
+		<timeseekforward>10</timeseekforward>
+		<timeseekbackward>-10</timeseekbackward>
+	</video>
+	<audio>
+		<timeseekforward>10</timeseekforward>  <!-- Time to seek forward in seconds when doing a short seek.  Defaults to 30. -->
+		<timeseekbackward>-10</timeseekbackward>
+	</audio>
+	<navigatevirtualkeyboard>true</navigatevirtualkeyboard>
+</advancedsettings>
