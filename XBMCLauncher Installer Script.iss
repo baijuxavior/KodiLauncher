@@ -278,7 +278,8 @@ Source: "Script Files\CloseXBMC.exe"; DestDir: "{pf32}\XBMC"; Flags: ignoreversi
 Source: "Script Files\CloseXBMC.py"; DestDir: "{pf32}\XBMC"; Flags: ignoreversion   ; Components: OptionShutdownMenu
 Source: "Script Files\RestartXBMC.exe"; DestDir: "{pf32}\XBMC"; Flags: ignoreversion   ; Components: OptionShutdownMenu
 Source: "Script Files\RestartXBMC.py"; DestDir: "{pf32}\XBMC"; Flags: ignoreversion   ; Components: OptionShutdownMenu
-Source: "Script Files\DialogButtonMenu.xml"; DestDir: "{pf32}\XBMC\addons\skin.confluence\720p"; Flags: ignoreversion ; Components: OptionShutdownMenu
+Source: "Script Files\DialogButtonMenu32.xml"; DestDir: "{pf32}\XBMC\addons\skin.confluence\720p"; DestName: DialogButtonMenu.xml; Flags: ignoreversion ; Components: OptionShutdownMenu; Check: "not IsWin64"
+Source: "Script Files\DialogButtonMenu64.xml"; DestDir: "{pf32}\XBMC\addons\skin.confluence\720p"; DestName: DialogButtonMenu.xml; Flags: ignoreversion ; Components: OptionShutdownMenu; Check: IsWin64
 
 Source: "Script Files\ConfluenceShutdownButtonAction.exe"; DestDir: {app}; Flags: ignoreversion   ; Components: OptionShutdownMenu
 Source: "Script Files\ConfluenceShutdownButtonAction.py"; DestDir: {app}; Flags: ignoreversion   ; Components: OptionShutdownMenu
@@ -286,7 +287,6 @@ Source: "Script Files\CloseXBMC.exe"; DestDir: {app}; Flags: ignoreversion   ; C
 Source: "Script Files\CloseXBMC.py"; DestDir: {app}; Flags: ignoreversion   ; Components: OptionShutdownMenu
 Source: "Script Files\RestartXBMC.exe"; DestDir: {app}; Flags: ignoreversion   ; Components: OptionShutdownMenu
 Source: "Script Files\RestartXBMC.py"; DestDir: {app}; Flags: ignoreversion   ; Components: OptionShutdownMenu
-Source: "Script Files\DialogButtonMenu.xml"; DestDir: {app}; Flags: ignoreversion  ; Components: OptionShutdownMenu
  
 Source: "Script Files\Windows8-HybridShutdown.exe"; DestDir: {app}; Flags: ignoreversion ;  Components: OptionMetroStart  OptionDesktopPowerButtons
 Source: "Script Files\Windows8-Restart.exe"; DestDir: {app}; Flags: ignoreversion ;  Components: OptionMetroStart  OptionDesktopPowerButtons
