@@ -1798,7 +1798,7 @@ Process, Exist, explorer.exe ; check if explorer.exe is running
 return
 
 #S:: ;show settings gui
-run %A_ScriptDir% \XBMCLauncherGUI.exe
+run %A_ScriptDir%\XBMCLauncherGUI.exe
 return
 
 #!Enter:: ; Win+Alt+Enter shortcut key
