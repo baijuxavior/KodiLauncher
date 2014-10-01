@@ -532,12 +532,11 @@ return
 
 MenuShowSettingsGUI:
 BreakFocus = 1
-LauncherGUI = %A_ScriptDir%\KodiLauncherGUI.exe
-if (FileExist(LauncherGUI))
-	run %LauncherGUI%
-else
-	MsgBox Settings GUI not found.
-	
+IfNotExist %A_ScriptDir%\KodiLauncherGUI.exe
+	{	MsgBox, 48 , KodiLauncher, Settings GUI not found., 3
+		Return
+	}
+run %A_ScriptDir%\KodiLauncherGUI.exe	
 return
 
 MenuStartKodiAtWindowsLogonHandler:
@@ -1802,6 +1801,10 @@ Process, Exist, explorer.exe ; check if explorer.exe is running
 return
 
 #S:: ;show settings gui
+IfNotExist %A_ScriptDir%\KodiLauncherGUI.exe
+	{	MsgBox, 48 , KodiLauncher, Settings GUI not found., 3
+		Return
+	}
 run %A_ScriptDir%\KodiLauncherGUI.exe
 return
 
