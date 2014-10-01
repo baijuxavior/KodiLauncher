@@ -2,22 +2,22 @@
  * * * Compile_AHK SETTINGS BEGIN * * *
 
 [AHK2EXE]
-Exe_File=%In_Dir%\XBMCLauncher.exe
+Exe_File=%In_Dir%\KodiLauncher.exe
 Created_Date=1
 [VERSION]
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
-File_Description=XBMCLauncher
-File_Version=4.1.0.0
+File_Description=KodiLauncher
+File_Version=1.0.0.0
 Inc_File_Version=0
-Internal_Name=XBMCLauncher
+Internal_Name=KodiLauncher
 Legal_Copyright=C@P Baiju Xavior
-Original_Filename=XBMCLauncher
-Product_Name=XBMCLauncher
-Product_Version=4.1.0.0
+Original_Filename=KodiLauncher
+Product_Name=KodiLauncher
+Product_Version=1.0.0.0
 [ICONS]
-Icon_1=%In_Dir%\XBMCLauncher.ico
-Icon_2=%In_Dir%\XBMCLauncher.ico
+Icon_1=%In_Dir%\KodiLauncher.ico
+Icon_2=%In_Dir%\KodiLauncher.ico
 
 * * * Compile_AHK SETTINGS END * * *
 */
@@ -29,7 +29,7 @@ Icon_2=%In_Dir%\XBMCLauncher.ico
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-DllCall("CreateMutex", "uint", 0, "int", false, "str", "xbmc_launcher_mutex") ; create a mutex to find whether the application is already running while installation.
+DllCall("CreateMutex", "uint", 0, "int", false, "str", "kodi_launcher_mutex") ; create a mutex to find whether the application is already running while installation.
 
 ProgFiles32() ;get 32 bit program files folder
 {
@@ -46,7 +46,7 @@ ProgFiles32() ;get 32 bit program files folder
 objWMIService := ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" A_ComputerName "\root\cimv2")
 For objOperatingSystem in objWMIService.ExecQuery("Select * from Win32_OperatingSystem")
 Global OSVersion := 	objOperatingSystem.Version
-global AppVersion = 4.1
+global AppVersion = 1.0
 
 Global ProgFiles := ProgFiles32() ;Program files path
 global FocusDelay := GetSettings("FocusDelay", 10000)
@@ -56,8 +56,8 @@ global DisableFocusPermanently := GetSettings("DisableFocusPermanently", 0)
 global FocussedOnce = 0
 global FocusCount = 0
 
-global CloseXBMCatSleep := GetSettings("CloseXBMCatSleep", 0)
-global ForceCloseXBMC := GetSettings("ForceCloseXBMC", 0)
+global CloseKodiOnSleep := GetSettings("CloseKodiOnSleep", 0)
+global ForceCloseKodi := GetSettings("ForceCloseKodi", 0)
 global StartExplorer := GetSettings("StartExplorer", 1)
 global StartMetroUI := GetSettings("StartMetroUI", 1)
 global WinKeySent = 0
@@ -67,13 +67,13 @@ global ShutdownButtonClicked := GetSettings("ShutdownButtonClicked", 0)
 
 global Suspending = 0
 global StartupDelay := GetSettings("StartupDelay", 0)
-global StartXBMCatWinLogon := GetSettings("StartXBMCatWinLogon", 1)
-global StartXBMCatWinResume := GetSettings("StartXBMCatWinResume", 0)
-global StartXBMCPortable := GetSettings("StartXBMCPortable", 0)
-global BreakFocus = 0 ; break focus while setting xbmclauncher settings
+global StartKodiOnWinLogon := GetSettings("StartKodiOnWinLogon", 1)
+global StartKodiOnWinResume := GetSettings("StartKodiOnWinResume", 0)
+global StartKodiInPortableMode := GetSettings("StartKodiInPortableMode", 0)
+global BreakFocus = 0 ; break focus while setting KodiLauncher settings
 
 
-global XBMCPath := GetSettings("XBMC_Path", ProgFiles . "\XBMC\XBMC.exe")
+global KodiPath := GetSettings("Kodi_Path", ProgFiles . "\Kodi\Kodi.exe")
 global XBMConiMONPath := GetSettings("XBMConiMON_Path", "")
 global iMONPath := GetSettings("iMON_Path", ProgFiles . "\SoundGraph\iMON\iMON.exe")
 
@@ -104,9 +104,9 @@ Global App9 := GetSettings("App9_Path", "")
 global StartApps3 := GetSettings("StartApps3", 0)
 global PreventFocusApps3 := GetSettings("PreventFocusApps3", 0)
 
-global ReloadXBMCLauncher := GetSettings("ReloadXBMCLauncher", 0)
-SaveSettings("ReloadXBMCLauncher", 0)
-SaveSettings("RestartXBMC", 0)
+global ReloadKodiLauncher := GetSettings("ReloadKodiLauncher", 0)
+SaveSettings("ReloadKodiLauncher", 0)
+SaveSettings("RestartKodi", 0)
 
 global ShellName
 RegRead, ShellName, HKCU, Software\Microsoft\Windows NT\CurrentVersion\Winlogon, Shell
@@ -119,24 +119,24 @@ RegRead, ShellName, HKCU, Software\Microsoft\Windows NT\CurrentVersion\Winlogon,
 
 fdelay := FocusDelay // 1000 ; variable to show menu name with delay
 sdelay := StartupDelay // 1000
-IfExist, %A_WorkingDir%\XBMCLauncher.ico
-Menu, Tray, Icon, %A_WorkingDir%\XBMCLauncher.ico ; create tray icon.
-Menu, Tray, Tip, XBMCLauncher V%AppVersion% `nRight click to view menu
-Menu, Tray, add, Start XBMC [Win+Alt+Enter], MenuStartXBMCHandler
-Menu, Tray, add, Force Close XBMC Now, MenuCloseXBMCNow
+IfExist, %A_WorkingDir%\KodiLauncher.ico
+Menu, Tray, Icon, %A_WorkingDir%\KodiLauncher.ico ; create tray icon.
+Menu, Tray, Tip, KodiLauncher V%AppVersion% `nRight click to view menu
+Menu, Tray, add, Start Kodi [Win+Alt+Enter], MenuStartKodiHandler
+Menu, Tray, add, Force Close Kodi Now, MenuForceCloseKodiNow
 Menu, Tray, add ;add separator
 Menu, Tray, add, Start Explorer [Win+E], MenuStartExplorer
 Menu, Tray, add, Show Settings GUI [Win+S], MenuShowSettingsGUI
 Menu, Tray, add ;add separator
-Menu, XBMCStartSubMenu, add, Start XBMC When Windows Starts, MenuStartXBMCAtWindowsLogonHandler
-Menu, XBMCStartSubMenu, add, Start XBMC When Windows Resumes from Sleep, MenuStartXBMCAtWindowsResumeHandler
-Menu, XBMCStartSubMenu, add, Start XBMC in Portable Mode, MenuStartXBMCPortableModeHandler
-Menu, XBMCStartSubMenu, add,
-Menu, XBMCStartSubMenu, add, Change Startup Delay [%sdelay% sec], MenuSetStartupDelayHandler
-Menu, XBMCStartSubMenu, UnCheck, Start XBMC When Windows Starts
-Menu, XBMCStartSubMenu, UnCheck, Start XBMC When Windows Resumes from Sleep
-Menu, XBMCStartSubMenu, UnCheck, Start XBMC in Portable Mode
-Menu, Tray, add, XBMC Startup Settings, :XBMCStartSubMenu
+Menu, KodiStartSubMenu, add, Start Kodi When Windows Starts, MenuStartKodiAtWindowsLogonHandler
+Menu, KodiStartSubMenu, add, Start Kodi When Windows Resumes from Sleep, MenuStartKodiAtWindowsResumeHandler
+Menu, KodiStartSubMenu, add, Start Kodi in Portable Mode, MenuStartKodiInPortableModeHandler
+Menu, KodiStartSubMenu, add,
+Menu, KodiStartSubMenu, add, Change Startup Delay [%sdelay% sec], MenuSetStartupDelayHandler
+Menu, KodiStartSubMenu, UnCheck, Start Kodi When Windows Starts
+Menu, KodiStartSubMenu, UnCheck, Start Kodi When Windows Resumes from Sleep
+Menu, KodiStartSubMenu, UnCheck, Start Kodi in Portable Mode
+Menu, Tray, add, Kodi Startup Settings, :KodiStartSubMenu
 
 Menu, FocusSubMenu, add, Change Focus Delay [%fdelay% sec], MenuSetFocusDelayHandler
 Menu, FocusSubMenu, add,
@@ -146,7 +146,7 @@ Menu, FocusSubMenu, add, Disable Focus Temporarily [Win+F9], MenuDisableFocusHan
 Menu, FocusSubMenu, UnCheck, Disable Focus Temporarily [Win+F9]
 Menu, FocusSubMenu, add, Check Focus Only Once, MenuCheckFocusOnceHandler
 Menu, FocusSubMenu, UnCheck, Check Focus Only Once
-Menu, Tray, add, XBMC Focus Settings, :FocusSubMenu
+Menu, Tray, add, Kodi Focus Settings, :FocusSubMenu
 
 if (ShowCustomShutdownMenu = 1)
 	{	global currentshutdownaction := "Shutdown"
@@ -156,29 +156,29 @@ if (ShowCustomShutdownMenu = 1)
 			currentshutdownaction := "Hibernate"
 		If (ShutdownAction = "s")
 			currentshutdownaction := "Sleep"
-		Menu, XBMCExitSubMenu, add, Set Shutdown Button Action [for custom shutdown menu only] - %currentshutdownaction%, MenuSetShutdownActionHandler
+		Menu, KodiExitSubMenu, add, Set Shutdown Button Action [for custom shutdown menu only] - %currentshutdownaction%, MenuSetShutdownActionHandler
 		
-		Menu, XBMCExitSubMenu, add, Force Close XBMC instead of Normal Close [for custom shutdown menu only], MenuForceCloseXBMCHandler
-		Menu, XBMCExitSubMenu, UnCheck, Force Close XBMC instead of Normal Close [for custom shutdown menu only]
-		Menu, XBMCExitSubMenu, add,
+		Menu, KodiExitSubMenu, add, Force Close Kodi instead of Normal Close [for custom shutdown menu only], MenuForceCloseKodiHandler
+		Menu, KodiExitSubMenu, UnCheck, Force Close Kodi instead of Normal Close [for custom shutdown menu only]
+		Menu, KodiExitSubMenu, add,
 		
 	}	
-Menu, XBMCExitSubMenu, add, Close XBMC on Suspend, MenuCloseXBMCatSleepHandler
-Menu, XBMCExitSubMenu, UnCheck, Close XBMC on Suspend
+Menu, KodiExitSubMenu, add, Close Kodi on Suspend, MenuCloseKodiOnSuspendHandler
+Menu, KodiExitSubMenu, UnCheck, Close Kodi on Suspend
 
-Menu, XBMCExitSubMenu, add, Start Windows Explorer when XBMC is closed, MenuStartExplorerHandler
-Menu, XBMCExitSubMenu, UnCheck, Start Windows Explorer when XBMC is closed
+Menu, KodiExitSubMenu, add, Start Windows Explorer when Kodi is closed, MenuStartExplorerHandler
+Menu, KodiExitSubMenu, UnCheck, Start Windows Explorer when Kodi is closed
 if (OSVersion >= 6.2)
 	{
-	Menu, XBMCExitSubMenu, add, Start Windows8 Metro UI when XBMC is closed, MenuStartMetroUIHandler
-	Menu, XBMCExitSubMenu, UnCheck, Start Windows8 Metro UI when XBMC is closed
+	Menu, KodiExitSubMenu, add, Start Windows8 Metro UI when Kodi is closed, MenuStartMetroUIHandler
+	Menu, KodiExitSubMenu, UnCheck, Start Windows8 Metro UI when Kodi is closed
 	}
-Menu, Tray, add, XBMC Exit Settings, :XBMCExitSubMenu
+Menu, Tray, add, Kodi Exit Settings, :KodiExitSubMenu
 	
-Menu, XBMCPathSubMenu, add, Set XBMC Path, MenuSetXBMCPathHandler
-Menu, XBMCPathSubMenu, add, Set XBMConiMON Path, MenuSetXBMConiMONPathHandler
-Menu, XBMCPathSubMenu, add, Set iMON Path, MenuSetiMONPathHandler
-Menu, Tray, add, XBMC Path Settings, :XBMCPathSubMenu
+Menu, KodiPathSubMenu, add, Set Kodi Path, MenuSetKodiPathHandler
+Menu, KodiPathSubMenu, add, Set XBMConiMON Path, MenuSetXBMConiMONPathHandler
+Menu, KodiPathSubMenu, add, Set iMON Path, MenuSetiMONPathHandler
+Menu, Tray, add, Kodi Path Settings, :KodiPathSubMenu
 
 Menu, Tray, add ;add separator
 shell := RTrim(ShellName, "`.exe")
@@ -226,10 +226,10 @@ if (AppName = "")
 	AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 3 - %AppName%, MenuSetApp3Handler
 
-Menu, ExternalAppsSubMenu, add, Start First Group Applications with XBMC Launcher, MenuStartApps1Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start First Group Applications with XBMC Launcher
-Menu, ExternalAppsSubMenu, add, First Group Apps Prevent XBMC Focus, MenuApps1PreventFocusHandler
-Menu, ExternalAppsSubMenu, UnCheck, First Group Apps Prevent XBMC Focus
+Menu, ExternalAppsSubMenu, add, Start First Group Applications with KodiLauncher, MenuStartApps1Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start First Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, First Group Apps Prevent Kodi Focus, MenuApps1PreventFocusHandler
+Menu, ExternalAppsSubMenu, UnCheck, First Group Apps Prevent Kodi Focus
 
 Menu, ExternalAppsSubMenu, add ;add separator
 
@@ -248,10 +248,10 @@ if (AppName = "")
     AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 6 - %AppName%, MenuSetApp6Handler
 
-Menu, ExternalAppsSubMenu, add, Start Second Group Applications with XBMC Launcher, MenuStartApps2Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start Second Group Applications with XBMC Launcher
-Menu, ExternalAppsSubMenu, add, Second Group Apps Prevent XBMC Focus, MenuApps2PreventFocusHandler
-Menu, ExternalAppsSubMenu, UnCheck, Second Group Apps Prevent XBMC Focus
+Menu, ExternalAppsSubMenu, add, Start Second Group Applications with KodiLauncher, MenuStartApps2Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start Second Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, Second Group Apps Prevent Kodi Focus, MenuApps2PreventFocusHandler
+Menu, ExternalAppsSubMenu, UnCheck, Second Group Apps Prevent Kodi Focus
 
 Menu, ExternalAppsSubMenu, add ;add separator
 
@@ -270,24 +270,24 @@ if (AppName = "")
     AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 9 - %AppName%, MenuSetApp9Handler
 
-Menu, ExternalAppsSubMenu, add, Start Third Group Applications with XBMC Launcher, MenuStartApps3Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start Third Group Applications with XBMC Launcher
-Menu, ExternalAppsSubMenu, add, Third Group Apps Prevent XBMC Focus, MenuApps3PreventFocusHandler
-Menu, ExternalAppsSubMenu, UnCheck, Third Group Apps Prevent XBMC Focus
+Menu, ExternalAppsSubMenu, add, Start Third Group Applications with KodiLauncher, MenuStartApps3Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start Third Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, Third Group Apps Prevent Kodi Focus, MenuApps3PreventFocusHandler
+Menu, ExternalAppsSubMenu, UnCheck, Third Group Apps Prevent Kodi Focus
 
 
 Menu, Tray, add, External Applications, :ExternalAppsSubMenu
 
 
-Menu, FolderSubMenu, add, Open XBMC Programs Folder, MenuOpenXBMCFolderHandler
-Menu, FolderSubMenu, add, Open XBMC Application Data Folder, MenuOpenXBMCAppFolderHandler
+Menu, FolderSubMenu, add, Open Kodi Programs Folder, MenuOpenKodiFolderHandler
+Menu, FolderSubMenu, add, Open Kodi Application Data Folder, MenuOpenKodiAppFolderHandler
 Menu, FolderSubMenu, add
-Menu, FolderSubMenu, add, Open XBMCLauncher Programs Folder, MenuOpenXBMCLauncherFolderHandler
-Menu, FolderSubMenu, add, Open XBMCLauncher Settings in Regedit, MenuOpenXBMCLauncherSettingsHandler
+Menu, FolderSubMenu, add, Open KodiLauncher Programs Folder, MenuOpenKodiLauncherFolderHandler
+Menu, FolderSubMenu, add, Open KodiLauncher Settings in Regedit, MenuOpenKodiLauncherSettingsHandler
 Menu, Tray, add, Application Folders, :FolderSubMenu
 Menu, Tray, add
 Menu, Tray, add, Turn off Display [Win+F11], MenuTurnOffDisplay
-Menu, Tray, add, About XBMCLauncher, MenuAboutHandler
+Menu, Tray, add, About KodiLauncher, MenuAboutHandler
 Menu, Tray, add
 Menu, tray, NoStandard
 Menu, tray, Standard
@@ -295,74 +295,74 @@ Menu, tray, Standard
 if (FocusOnce = 1)
 	Menu, FocusSubMenu, Check, Check Focus Only Once
 
-if (CloseXBMCatSleep = 1)
-	Menu, XBMCExitSubMenu, Check, Close XBMC on Suspend
+if (CloseKodiOnSleep = 1)
+	Menu, KodiExitSubMenu, Check, Close Kodi on Suspend
 
-if (ForceCloseXBMC = 1)
-	Menu, XBMCExitSubMenu, Check, Force Close XBMC instead of Normal Close [for custom shutdown menu only]
+if (ForceCloseKodi = 1)
+	Menu, KodiExitSubMenu, Check, Force Close Kodi instead of Normal Close [for custom shutdown menu only]
 
 if (StartExplorer = 1)
-	Menu, XBMCExitSubMenu, Check, Start Windows Explorer when XBMC is closed
+	Menu, KodiExitSubMenu, Check, Start Windows Explorer when Kodi is closed
 
 if (OSVersion >= 6.2 and StartMetroUI = 1)
-	Menu, XBMCExitSubMenu, Check, Start Windows8 Metro UI when XBMC is closed
+	Menu, KodiExitSubMenu, Check, Start Windows8 Metro UI when Kodi is closed
 
-if (StartXBMCatWinLogon = 1)
-	Menu, XBMCStartSubMenu, Check, Start XBMC When Windows Starts
+if (StartKodiOnWinLogon = 1)
+	Menu, KodiStartSubMenu, Check, Start Kodi When Windows Starts
 
-if (StartXBMCatWinResume = 1)
-	Menu, XBMCStartSubMenu, Check, Start XBMC When Windows Resumes from Sleep
+if (StartKodiOnWinResume = 1)
+	Menu, KodiStartSubMenu, Check, Start Kodi When Windows Resumes from Sleep
 
-if (StartXBMCPortable = 1)
-	Menu, XBMCStartSubMenu, Check, Start XBMC in Portable Mode
+if (StartKodiInPortableMode = 1)
+	Menu, KodiStartSubMenu, Check, Start Kodi in Portable Mode
 
 if (FocusExternalPlayer = 1)
 	Menu, ExternalPlayerSubMenu, Check, Focus External Player
 
 if (StartApps1 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start First Group Applications with XBMC Launcher
+	Menu, ExternalAppsSubMenu, Check, Start First Group Applications with KodiLauncher
 
 if (PreventFocusApps1 = 1)
-	Menu, ExternalAppsSubMenu, Check, First Group Apps Prevent XBMC Focus
+	Menu, ExternalAppsSubMenu, Check, First Group Apps Prevent Kodi Focus
 
 if (StartApps2 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start Second Group Applications with XBMC Launcher
+	Menu, ExternalAppsSubMenu, Check, Start Second Group Applications with KodiLauncher
 
 if (PreventFocusApps2 = 1)
-	Menu, ExternalAppsSubMenu, Check, Second Group Apps Prevent XBMC Focus
+	Menu, ExternalAppsSubMenu, Check, Second Group Apps Prevent Kodi Focus
 
 if (StartApps3 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start Third Group Applications with XBMC Launcher
+	Menu, ExternalAppsSubMenu, Check, Start Third Group Applications with KodiLauncher
 
 if (PreventFocusApps3 = 1)
-	Menu, ExternalAppsSubMenu, Check, Third Group Apps Prevent XBMC Focus
+	Menu, ExternalAppsSubMenu, Check, Third Group Apps Prevent Kodi Focus
 
 if (DisableFocusPermanently = 1)
 	Menu, FocusSubMenu, Check, Disable Focus Permanently
-; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>		PROMPT FOR XBMC IF NOT FOUND 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>		PROMPT FOR Kodi IF NOT FOUND 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-IfNotExist, %XBMCPath% ; if xbmc.exe is not found, prompt to select xbmc.exe manually
+IfNotExist, %KodiPath% ; if Kodi.exe is not found, prompt to select Kodi.exe manually
 	{
-		PromptXBMCPath := GetSettings("PromptXBMCPath", 1)
-		if (PromptXBMCPath = 1)
-		MsgBox, 36, Select XBMC.exe, Could not locate XBMC executable file. Do you want to select the file manually?, 10
+		PromptKodiPath := GetSettings("PromptKodiPath", 1)
+		if (PromptKodiPath = 1)
+		MsgBox, 36, Select Kodi.exe, Could not locate Kodi executable file. Do you want to select the file manually?, 10
 		ifMsgBox Yes
 		{
-			XBMCPath := SaveApplicationPath("XBMC", XBMCPath)
+			KodiPath := SaveApplicationPath("Kodi", KodiPath)
 			if (ShowCustomShutdownMenu = 1)
-			{	SplitPath, XBMCPath, ,newpath
+			{	SplitPath, KodiPath, ,newpath
 				FileCopy, %A_WorkingDir%\ShutdownAction.exe, %newpath%, 1
 				FileCopy, %A_WorkingDir%\ShutdownAction.py, %newpath%, 1
-				FileCopy, %A_WorkingDir%\CloseXBMC.exe, %newpath%, 1
-				FileCopy, %A_WorkingDir%\CloseXBMC.py, %newpath%, 1
+				FileCopy, %A_WorkingDir%\CloseKodi.exe, %newpath%, 1
+				FileCopy, %A_WorkingDir%\CloseKodi.py, %newpath%, 1
 				FileCopy, %newpath%\addons\skin.confluence\720p\DialogButtonMenu.xml, %newpath%\addons\skin.confluence\720p\DialogButtonMenu_Backup.xmlbk, 0
 				FileCopy, %A_WorkingDir%\DialogButtonMenu.xml, %newpath%\addons\skin.confluence\720p, 1
 			}
 		}	
 		ifMsgBox No
-			SaveSettings("PromptXBMCPath", 0)
+			SaveSettings("PromptKodiPath", 0)
 			
 	}
 
@@ -370,45 +370,45 @@ IfNotExist, %XBMCPath% ; if xbmc.exe is not found, prompt to select xbmc.exe man
 
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 			LAUNCH APPLICATIONS 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-If (StartXBMCatWinLogon = 1 and ReloadXBMCLauncher = 0)
+If (StartKodiOnWinLogon = 1 and ReloadKodiLauncher = 0)
 {
 	
 Sleep %StartupDelay%
-LaunchApplication(XBMCPath)
-WinWait,XBMC,,2 ; wait 2 seconds
-WinActivate, ahk_class XBMC ; activate and bring to front.
+LaunchApplication(KodiPath)
+WinWait,Kodi,,2 ; wait 2 seconds
+WinActivate, ahk_class Kodi ; activate and bring to front.
 }
 
 
-If (StartApps1 = 1 and ReloadXBMCLauncher = 0)
+If (StartApps1 = 1 and ReloadKodiLauncher = 0)
 {
 LaunchApplication(App1)
 LaunchApplication(App2)
 LaunchApplication(App3)
 }
 
-If (StartApps2 = 1 and ReloadXBMCLauncher = 0)
+If (StartApps2 = 1 and ReloadKodiLauncher = 0)
 {
 LaunchApplication(App4)
 LaunchApplication(App5)
 LaunchApplication(App6)
 }
 
-If (StartApps3 = 1 and ReloadXBMCLauncher = 0)
+If (StartApps3 = 1 and ReloadKodiLauncher = 0)
 {
 LaunchApplication(App7)
 LaunchApplication(App8)
 LaunchApplication(App9)
 }
 
-if (ReloadXBMCLauncher = 0)
+if (ReloadKodiLauncher = 0)
 	{LaunchApplication(iMONPath)
 	LaunchApplication(XBMConiMONPath)
 	}
 
-ReloadXBMCLauncher = 0
+ReloadKodiLauncher = 0
 
-	; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>	 START XBMC ON WINDOWS RESUME FROM HIBERNATION OR SLEEP 	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+	; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>	 START Kodi ON WINDOWS RESUME FROM HIBERNATION OR SLEEP 	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 OnMessage(0x218, "WM_POWERBROADCAST")
@@ -425,9 +425,9 @@ WM_POWERBROADCAST(wParam, lParam)
 		
 		Suspending = 1 ;System is suspending. Do not start Explorer.	
 		
-		if (CloseXBMCatSleep = 1) ; force close xbmc
+		if (CloseKodiOnSleep = 1) ; force close Kodi
 		{
-			Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel >= 1) ; If it is running 
 			{ 
 				Process, Close, %ErrorLevel%  
@@ -440,14 +440,14 @@ WM_POWERBROADCAST(wParam, lParam)
 	If (wParam = 7) ;on resuming from suspend state
 		{
 			Suspending = 0
-			If (StartXBMCatWinResume = 1)
+			If (StartKodiOnWinResume = 1)
 			 	{	LaunchApplication(XBMConiMONPath)
 			
 					Sleep %StartupDelay%
-					;WinWait,XBMC,,6 ; wait 6 seconds
-					WinActivate, ahk_class XBMC ; activate and bring to front.
+					;WinWait,Kodi,,6 ; wait 6 seconds
+					WinActivate, ahk_class Kodi ; activate and bring to front.
 
-					LaunchApplication(XBMCPath)
+					LaunchApplication(KodiPath)
 			
 					if (DisableFocusTemporarily = 1)
 					{
@@ -494,21 +494,21 @@ return
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  SYSTEM TRAY MENU HANDLERS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-MenuStartXBMCHandler:
+MenuStartKodiHandler:
 {
-LaunchApplication(XBMCPath)
+LaunchApplication(KodiPath)
 Sleep, 2000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 FocussedOnce = 0
 }
 return
 
 
 
-MenuCloseXBMCNow:
+MenuForceCloseKodiNow:
 {
 	BreakFocus = 1
-		Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+		Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel > 0) ; If it is running 
 				Process, Close, %ErrorLevel% 
 	BreakFocus = 0
@@ -528,7 +528,7 @@ return
 
 MenuShowSettingsGUI:
 BreakFocus = 1
-LauncherGUI = %A_ScriptDir%\XBMCLauncherGUI.exe
+LauncherGUI = %A_ScriptDir%\KodiLauncherGUI.exe
 if (FileExist(LauncherGUI))
 	run %LauncherGUI%
 else
@@ -536,17 +536,17 @@ else
 	
 return
 
-MenuStartXBMCAtWindowsLogonHandler:
-StartXBMCAtWinLogon() 
+MenuStartKodiAtWindowsLogonHandler:
+StartKodiOnWinLogon() 
 return
 
-MenuStartXBMCAtWindowsResumeHandler:
-StartXBMCAtWinResume()
+MenuStartKodiAtWindowsResumeHandler:
+StartKodiOnWinResume()
 return
 
 
-MenuStartXBMCPortableModeHandler:
-StartXBMCPortableMode()
+MenuStartKodiInPortableModeHandler:
+StartKodiInPortableModeMode()
 return
 
 MenuSetStartupDelayHandler:
@@ -574,8 +574,8 @@ MenuFocusExternalPlayerHandler:
 SetFocusExternalPlayer()
 return
 
-MenuSetXBMCPathHandler:
-XBMCPath := SaveApplicationPath("XBMC", XBMCPath)
+MenuSetKodiPathHandler:
+KodiPath := SaveApplicationPath("Kodi", KodiPath)
 return
 
 MenuSetXBMConiMONPathHandler:
@@ -849,12 +849,12 @@ MenuSetShutdownActionHandler:
 SetShutdownAction()
 return
 
-MenuCloseXBMCatSleepHandler:
-CloseXBMCatSleep()
+MenuCloseKodiOnSuspendHandler:
+CloseKodiOnSleep()
 return
 
-MenuForceCloseXBMCHandler:
-SetForceCloseXBMC()
+MenuForceCloseKodiHandler:
+SetForceCloseKodi()
 return
 
 MenuStartExplorerHandler:
@@ -869,9 +869,9 @@ MenuChangeShellHandler:
 ChangeShell()
 return
 
-MenuOpenXBMCAppFolderHandler:
+MenuOpenKodiAppFolderHandler:
 {
-	appfolder := A_AppData . "\XBMC"
+	appfolder := A_AppData . "\Kodi"
 	ifexist, %appfolder%
 		run %appfolder%
 	else
@@ -880,11 +880,11 @@ MenuOpenXBMCAppFolderHandler:
 
 return
 
-MenuOpenXBMCFolderHandler:
+MenuOpenKodiFolderHandler:
 {
-	SplitPath, XBMCPath, , xbmcfolder
-	IfExist, %xbmcfolder%
-		run %xbmcfolder%
+	SplitPath, KodiPath, , Kodifolder
+	IfExist, %Kodifolder%
+		run %Kodifolder%
 	else
 		MsgBox, Folder not found.
 }
@@ -892,7 +892,7 @@ MenuOpenXBMCFolderHandler:
 return
 
 
-MenuOpenXBMCLauncherFolderHandler:
+MenuOpenKodiLauncherFolderHandler:
 
 {
 	run %A_ScriptDir%
@@ -901,9 +901,9 @@ MenuOpenXBMCLauncherFolderHandler:
 return
 
 
-MenuOpenXBMCLauncherSettingsHandler:
+MenuOpenKodiLauncherSettingsHandler:
 {
-	RegWrite, REG_SZ, HKCU, Software\Microsoft\Windows\CurrentVersion\Applets\Regedit, LastKey, HKEY_CURRENT_USER\Software\XBMCLauncher
+	RegWrite, REG_SZ, HKCU, Software\Microsoft\Windows\CurrentVersion\Applets\Regedit, LastKey, HKEY_CURRENT_USER\Software\KodiLauncher
 	Run, Regedit.exe
 }
 return
@@ -919,7 +919,7 @@ return
 MenuAboutHandler:
 {
 	BreakFocus = 1
-MsgBox XBMCLauncher %AppVersion% `n`nAn application to customize your XBMC HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
+MsgBox KodiLauncher %AppVersion% `n`nAn application to customize your Kodi HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
 }
 BreakFocus = 0
 return
@@ -936,7 +936,7 @@ return
 
 GetSettings(SettingsName, DefaultValue) ;Get settings from registry 
 {
-	RegRead, result, HKCU, Software\XBMCLauncher, %SettingsName%
+	RegRead, result, HKCU, Software\KodiLauncher, %SettingsName%
 	if (result = "")
 		return %DefaultValue%
 	else
@@ -946,7 +946,7 @@ GetSettings(SettingsName, DefaultValue) ;Get settings from registry
 
 SaveSettings(SettingsName, Value)
 {
-	RegWrite,reg_sz,HKCU,Software\XBMCLauncher, %SettingsName%, %Value%
+	RegWrite,reg_sz,HKCU,Software\KodiLauncher, %SettingsName%, %Value%
 }
 
 
@@ -987,12 +987,12 @@ SendFocus() ;focus
 {
 	if (ExternalPlayerRunning = 0)
 		{
-			Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel >= 1)
-				IfWinNotActive, ahk_class XBMC ;if xbmc is not active
-				WinActivate, ahk_class XBMC ;activate xbmc
-				{	WinGet, hWnd, ID, ahk_class XBMC
-					WinRestore, ahk_class XBMC
+				IfWinNotActive, ahk_class Kodi ;if Kodi is not active
+				WinActivate, ahk_class Kodi ;activate Kodi
+				{	WinGet, hWnd, ID, ahk_class Kodi
+					WinRestore, ahk_class Kodi
 					DllCall("SetForegroundWindow", UInt, hWnd)
 				}	
 		}
@@ -1014,7 +1014,7 @@ SetFocusDelay() ;function to Change Focus Delay
 	if currentdelay is not number 
 		currentdelay = 5
 	
-	InputBox, Delay, XBMCLauncher - Specify Time Delay, Specify the delay between refocussing of XBMC in seconds. `n `nEnter '0' seconds to prevent refocus permanently., , , , , , , , %currentdelay%
+	InputBox, Delay, KodiLauncher - Specify Time Delay, Specify the delay between refocussing of Kodi in seconds. `n `nEnter '0' seconds to prevent refocus permanently., , , , , , , , %currentdelay%
 
 	If ErrorLevel ; If cancel was pressed
 		{
@@ -1058,7 +1058,7 @@ If (ErrorLevel = 0) ;if not running
 	{
 	if FileExist(AppPath) 
 		{
-		if (FileName = "XBMC.exe" and StartXBMCPortable = 1) 
+		if (FileName = "Kodi.exe" and StartKodiInPortableMode = 1) 
 			run %AppPath% -p
 		else
 			run %AppPath%
@@ -1092,40 +1092,40 @@ else
 }
 
 
-StartXBMCAtWinLogon()
+StartKodiOnWinLogon()
 {
-	menu, XBMCStartSubMenu, ToggleCheck, Start XBMC When Windows Starts
-	if (StartXBMCatWinLogon = 0)
-		StartXBMCatWinLogon = 1 ;enable. load xbmc
+	menu, KodiStartSubMenu, ToggleCheck, Start Kodi When Windows Starts
+	if (StartKodiOnWinLogon = 0)
+		StartKodiOnWinLogon = 1 ;enable. load Kodi
 	else
-		StartXBMCatWinLogon = 0 ;disable. don't load
-		SaveSettings("StartXBMCatWinLogon", StartXBMCatWinLogon)
+		StartKodiOnWinLogon = 0 ;disable. don't load
+		SaveSettings("StartKodiOnWinLogon", StartKodiOnWinLogon)
 		return
 }
 
-StartXBMCAtWinResume()
+StartKodiOnWinResume()
 {
-	menu, XBMCStartSubMenu, ToggleCheck, Start XBMC When Windows Resumes from Sleep
-	if (StartXBMCatWinResume = 0)
-		StartXBMCatWinResume = 1 ;enable. load xbmc
+	menu, KodiStartSubMenu, ToggleCheck, Start Kodi When Windows Resumes from Sleep
+	if (StartKodiOnWinResume = 0)
+		StartKodiOnWinResume = 1 ;enable. load Kodi
 	else
-		StartXBMCatWinResume = 0 ;disable. don't load
+		StartKodiOnWinResume = 0 ;disable. don't load
 		
-		SaveSettings("StartXBMCatWinResume", StartXBMCatWinResume)
+		SaveSettings("StartKodiOnWinResume", StartKodiOnWinResume)
 		return
 }
 
 
 
-StartXBMCPortableMode()
+StartKodiInPortableModeMode()
 {
-	menu, XBMCStartSubMenu, ToggleCheck, Start XBMC in Portable Mode
-	if (StartXBMCPortable = 0)
-		StartXBMCPortable = 1 ;enable. load xbmc in portable mode
+	menu, KodiStartSubMenu, ToggleCheck, Start Kodi in Portable Mode
+	if (StartKodiInPortableMode = 0)
+		StartKodiInPortableMode = 1 ;enable. load Kodi in portable mode
 	else
-		StartXBMCPortable = 0 ;disable.
+		StartKodiInPortableMode = 0 ;disable.
 		
-		SaveSettings("StartXBMCPortable", StartXBMCPortable)
+		SaveSettings("StartKodiInPortableMode", StartKodiInPortableMode)
 		return
 }
 
@@ -1303,33 +1303,33 @@ SetFocusExternalPlayer()
 		return
 }
 
-CloseXBMCatSleep()
+CloseKodiOnSleep()
 {
-	menu, XBMCExitSubMenu, ToggleCheck,Close XBMC on Suspend
-	if (CloseXBMCatSleep = 0)
-		CloseXBMCatSleep = 1 ;enable
+	menu, KodiExitSubMenu, ToggleCheck,Close Kodi on Suspend
+	if (CloseKodiOnSleep = 0)
+		CloseKodiOnSleep = 1 ;enable
 	else
-		CloseXBMCatSleep = 0 ;disable
-		SaveSettings("CloseXBMCatSleep", CloseXBMCatSleep)
+		CloseKodiOnSleep = 0 ;disable
+		SaveSettings("CloseKodiOnSleep", CloseKodiOnSleep)
 		return
 }
 
 
-SetForceCloseXBMC()
+SetForceCloseKodi()
 {
-	menu, XBMCExitSubMenu, ToggleCheck,Force Close XBMC instead of Normal Close [for custom shutdown menu only]
-	if (ForceCloseXBMC = 0)
-		ForceCloseXBMC = 1 ;enable
+	menu, KodiExitSubMenu, ToggleCheck,Force Close Kodi instead of Normal Close [for custom shutdown menu only]
+	if (ForceCloseKodi = 0)
+		ForceCloseKodi = 1 ;enable
 	else
-		ForceCloseXBMC = 0 ;disable
-		SaveSettings("ForceCloseXBMC", ForceCloseXBMC)
+		ForceCloseKodi = 0 ;disable
+		SaveSettings("ForceCloseKodi", ForceCloseKodi)
 		return
 }
 
 
 SetStartExplorer()
 {
-	menu, XBMCExitSubMenu, ToggleCheck,Start Windows Explorer when XBMC is closed
+	menu, KodiExitSubMenu, ToggleCheck,Start Windows Explorer when Kodi is closed
 	if (StartExplorer = 0)
 		StartExplorer = 1 ;enable
 	else
@@ -1342,7 +1342,7 @@ SetStartExplorer()
 
 SetStartMetroUI()
 {
-	menu, XBMCExitSubMenu, ToggleCheck,Start Windows8 Metro UI when XBMC is closed
+	menu, KodiExitSubMenu, ToggleCheck,Start Windows8 Metro UI when Kodi is closed
 	if (StartMetroUI = 0)
 		StartMetroUI = 1 ;enable
 	else
@@ -1354,7 +1354,7 @@ SetStartMetroUI()
 
 SetStartApps1()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start First Group Applications with XBMC Launcher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start First Group Applications with KodiLauncher
 	if (StartApps1 = 0)
 		StartApps1 = 1 ;enable. 
 	else
@@ -1365,7 +1365,7 @@ SetStartApps1()
 
 SetStartApps2()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start Second Group Applications with XBMC Launcher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start Second Group Applications with KodiLauncher
 	if (StartApps2 = 0)
 		StartApps2 = 1 ;enable. 
 	else
@@ -1377,7 +1377,7 @@ SetStartApps2()
 
 SetStartApps3()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start Third Group Applications with XBMC Launcher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start Third Group Applications with KodiLauncher
 	if (StartApps3 = 0)
 		StartApps3 = 1 ;enable. 
 	else
@@ -1389,7 +1389,7 @@ SetStartApps3()
 
 SetPreventFocusApps1()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, First Group Apps Prevent XBMC Focus
+	menu, ExternalAppsSubMenu, ToggleCheck, First Group Apps Prevent Kodi Focus
 	if (PreventFocusApps1 = 0)
 		PreventFocusApps1 = 1 ;enable. 
 	else
@@ -1401,7 +1401,7 @@ SetPreventFocusApps1()
 
 SetPreventFocusApps2()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Second Group Apps Prevent XBMC Focus
+	menu, ExternalAppsSubMenu, ToggleCheck, Second Group Apps Prevent Kodi Focus
 	if (PreventFocusApps2 = 0)
 		PreventFocusApps2 = 1 ;enable. 
 	else
@@ -1413,7 +1413,7 @@ SetPreventFocusApps2()
 
 SetPreventFocusApps3()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Third Group Apps Prevent XBMC Focus
+	menu, ExternalAppsSubMenu, ToggleCheck, Third Group Apps Prevent Kodi Focus
 	if (PreventFocusApps3 = 0)
 		PreventFocusApps3 = 1 ;enable. 
 	else
@@ -1443,12 +1443,12 @@ SetShutdownAction() ;function to set shutdown
 	global oldshutdownmenu	:= "Set Shutdown Button Action [for custom shutdown menu only] - " . currentshutdownaction
 	
 	
-	Gui, Add, GroupBox, x1 y4 w350 h111 +Center, Select XBMC Shutdown Menu Action
+	Gui, Add, GroupBox, x1 y4 w350 h111 +Center, Select Kodi Shutdown Menu Action
 	Gui, Add, Radio,  % ( ShutdownAction = "u" ? "Checked" : "" ) " x10 y40 w70 h30 vS1" , Shutdown
 	Gui, Add, Radio,  % ( ShutdownAction = "s" ? "Checked" : "" ) " x140 y40 w70 h30 vS2" , Sleep
 	Gui, Add, Radio,  % ( ShutdownAction = "h" ? "Checked" : "" ) " x250 y40 w70 h30 vS3" , Hibernate
 	Gui, Add, Button, x125 y78 w100 h30 , Apply
-	Gui, Show, w352 h121, Select XBMC Shutdown Menu Action
+	Gui, Show, w352 h121, Select Kodi Shutdown Menu Action
 	return
 
 	ButtonApply:
@@ -1476,7 +1476,7 @@ SetShutdownAction() ;function to set shutdown
 	
 	if (oldshutdownmenu != newshutdownmenu)
 		{
-			menu, XBMCExitSubMenu, rename, %oldshutdownmenu%, %newshutdownmenu%
+			menu, KodiExitSubMenu, rename, %oldshutdownmenu%, %newshutdownmenu%
 		}
 	
 	SaveSettings("ShutdownAction", Result)	
@@ -1495,7 +1495,7 @@ ChangeShell()
 	global SelectedShellName := ShellName
 	SplitPath, ShellName, ShellName
 		global OtherShellName = "Other Shell"
-	If(ShellName != "XBMCLauncher.exe" and ShellName != "Explorer.exe" and ShellName != "Explorer")
+	If(ShellName != "KodiLauncher.exe" and ShellName != "Explorer.exe" and ShellName != "Explorer")
 	{	
 		OtherShellName := RTrim(ShellName, "`.exe")
 		;MsgBox %ShellName%
@@ -1510,7 +1510,7 @@ ChangeShell()
 		
 	Gui, Add, GroupBox, x1 y4 w460 h111 +Center, Change Windows Shell
 	Gui, Add, Radio,  % ( Shelln = "Explorer" ? "Checked" : "" ) " x10 y40 w70 h30 vSH1" , Explorer
-	Gui, Add, Radio,  % ( Shelln = "XBMCLauncher" ? "Checked" : "" ) " x100 y40 w100 h30 vSH2" , XBMCLauncher
+	Gui, Add, Radio,  % ( Shelln = "KodiLauncher" ? "Checked" : "" ) " x100 y40 w100 h30 vSH2" , KodiLauncher
 	Gui, Add, Radio,  % ( Shelln = OtherShellName ? "Checked" : "" ) " x230 y40 w130 h30 vSH3" , %OtherShellName%
 	Gui, Add, Button, x380 y40 w70 h30 , Select
 	Gui, Add, Button, x180 y78 w100 h30 , Save
@@ -1540,8 +1540,8 @@ ChangeShell()
 	  shelln = Explorer
 	  }
    If SH2
-      {Result = %A_WorkingDir%\XBMCLauncher.exe
-      shelln = XBMCLauncher
+      {Result = %A_WorkingDir%\KodiLauncher.exe
+      shelln = KodiLauncher
 	  }
 	  
 	If SH3
@@ -1572,7 +1572,7 @@ MonitorCustomShutdown()
 	{	
 		
 			
-		Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+		Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 		If (ErrorLevel = 0) ; If it is closed 
 		{ 
 			ShutdownAction := GetSettings("ShutdownAction", "u")
@@ -1583,14 +1583,14 @@ MonitorCustomShutdown()
 				{
 					if (OSVersion >= 6.2) ; if windows 8
 						{
-						if (ForceCloseXBMC = 1)
+						if (ForceCloseKodi = 1)
 							run, Shutdown.exe -s -hybrid -f -t 00, ,Hide
 						else
 							run, Shutdown.exe -s -hybrid -t 00, ,Hide
 						}
 					else
 						{
-						if (ForceCloseXBMC = 1)
+						if (ForceCloseKodi = 1)
 							Shutdown, 5 ;shutdown = 1, force = 4
 						else
 							Shutdown, 1
@@ -1600,7 +1600,7 @@ MonitorCustomShutdown()
 				
 			if (ShutdownAction = "r") ;reboot
 				{
-				if (ForceCloseXBMC = 1)
+				if (ForceCloseKodi = 1)
 					Shutdown, 6 ;reboot = 2, force = 4
 				else
 					Shutdown, 2
@@ -1620,30 +1620,30 @@ MonitorCustomShutdown()
 		}
 	}
 	
-	RestartXBMC := GetSettings("RestartXBMC", 0)
-	;MsgBox %RestartXBMC%
-	If(RestartXBMC = 1)
+	RestartKodi := GetSettings("RestartKodi", 0)
+	;MsgBox %RestartKodi%
+	If(RestartKodi = 1)
 		{
 				;MsgBox sss	
-			Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel > 0) ; If it is running 
 			{
-				if (ForceCloseXBMC = 1)
+				if (ForceCloseKodi = 1)
 					Process, Close, %ErrorLevel%  
 				else
-					WinClose, ahk_class XBMC
-					WinWaitClose, ahk_class XBMC
+					WinClose, ahk_class Kodi
+					WinWaitClose, ahk_class Kodi
 			}
 			Loop
 			{
 				sleep, 1000 ; wait one second
-				Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+				Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 				If (ErrorLevel = 0) ; not running
 				{
-					LaunchApplication(XBMCPath)
+					LaunchApplication(KodiPath)
 					Sleep, 2000
-					WinActivate, ahk_class XBMC
-					SaveSettings("RestartXBMC", 0)
+					WinActivate, ahk_class Kodi
+					SaveSettings("RestartKodi", 0)
 					break
 				}
 			
@@ -1656,14 +1656,14 @@ MonitorCustomShutdown()
 
 StartExplorer() 
 {	
-	RestartXBMC := GetSettings("RestartXBMC", 0)
+	RestartKodi := GetSettings("RestartKodi", 0)
 
-	If(RestartXBMC = 0)
+	If(RestartKodi = 0)
 	{
 		ShutdownButtonClicked := GetSettings("ShutdownButtonClicked", 0)
 		if (StartExplorer = 1 and Suspending = 0 and ShutdownButtonClicked = 0) ;if not suspending
 		{
-			Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel = 0) ;if not running
 				{	Process, Exist, explorer.exe ; check if explorer.exe is running 
 					If (ErrorLevel = 0)
@@ -1682,13 +1682,13 @@ StartExplorer()
 StartMetroUI() 
 
 {
-	RestartXBMC := GetSettings("RestartXBMC", 0)
-	If(RestartXBMC = 0)
+	RestartKodi := GetSettings("RestartKodi", 0)
+	If(RestartKodi = 0)
 	{
 			ShutdownButtonClicked := GetSettings("ShutdownButtonClicked", 0)
 			if (StartMetroUI = 1 and Suspending = 0 and ShutdownButtonClicked = 0) ;if not suspending
 			{
-			Process, Exist, xbmc.exe ; check if xbmc.exe is running 
+			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel = 0) ;if not running
 				{
 					Process, Exist, explorer.exe ; check if explorer.exe is running 
@@ -1716,7 +1716,7 @@ SetStartupDelay()
 	if currentstartupdelay is not number 
 		currentstartupdelay = 0
 	
-	InputBox, StartDelay, XBMCLauncher - Specify Startup Delay, Specify the delay  in seconds for XBMC to start., , , , , , , , %currentstartupdelay%
+	InputBox, StartDelay, KodiLauncher - Specify Startup Delay, Specify the delay  in seconds for Kodi to start., , , , , , , , %currentstartupdelay%
 
 	If ErrorLevel ; If cancel was pressed
 		{
@@ -1741,7 +1741,7 @@ SetStartupDelay()
 								
 				if (startdelayold_name != startdelaynew_name)
 				{
-					menu, XBMCStartSubMenu, rename, %startdelayold_name%, %startdelaynew_name%
+					menu, KodiStartSubMenu, rename, %startdelayold_name%, %startdelaynew_name%
 				}
 				
 					
@@ -1761,12 +1761,12 @@ DisableFocusTemporarily()
 return
 
 $!F4:: ;Alt+F4
-IfWinActive, ahk_class XBMC ; check if xbmc.exe is running 
+IfWinActive, ahk_class Kodi ; check if Kodi.exe is running 
 	{
 	Send s
 	return
 	}
-IfWinNotActive, ahk_class XBMCLauncher
+IfWinNotActive, ahk_class KodiLauncher
 	Send !{F4}
 	return	
 
@@ -1798,34 +1798,34 @@ Process, Exist, explorer.exe ; check if explorer.exe is running
 return
 
 #S:: ;show settings gui
-run %A_ScriptDir%\XBMCLauncherGUI.exe
+run %A_ScriptDir%\KodiLauncherGUI.exe
 return
 
 #!Enter:: ; Win+Alt+Enter shortcut key
 
-LaunchApplication(XBMCPath)
+LaunchApplication(KodiPath)
 ;Sleep, 2000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 FocussedOnce = 0
 LaunchApplication(iMONPath)
 LaunchApplication(XBMConiMONPath)
 Sleep, 1000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 
-WinGet, Style, Style, ahk_class XBMC
-	if (Style & 0xC00000)  ;Detects if XBMC has a title bar.
-		Send {VKDC}  ;Maximize XBMC to fullscreen mode if its in a window mode.
+WinGet, Style, Style, ahk_class Kodi
+	if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
+		Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
 	Return
 
 
 		SetTitleMatchMode 2
-		#IfWinActive XBMC ahk_class XBMC ; XBMC detection for XBMC/GSB Home Screen action.
+		#IfWinActive Kodi ahk_class Kodi ; Kodi detection for Kodi/GSB Home Screen action.
 		#!Enter::
-		WinGet, Style, Style, ahk_class XBMC
-		if (Style & 0xC00000)  ;Detects if XBMC has a title bar.
-			Send {VKDC}  ;Maximize XBMC to fullscreen mode if its in a window mode.
-		WinMaximize ;Maximize XBMC if Windowed.
-		send, ^!{VK74} ; if XBMC is Active (GSB Home Jump will activate)
+		WinGet, Style, Style, ahk_class Kodi
+		if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
+			Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
+		WinMaximize ;Maximize Kodi if Windowed.
+		send, ^!{VK74} ; if Kodi is Active (GSB Home Jump will activate)
 		Return
 		
 		
