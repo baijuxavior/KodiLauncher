@@ -496,6 +496,10 @@ return
 
 MenuStartKodiHandler:
 {
+IfNotExist %KodiPath%
+	{	MsgBox, 48 , KodiLauncher, Kodi.exe not found., 3
+		Return
+	}
 LaunchApplication(KodiPath)
 Sleep, 2000
 WinActivate, ahk_class Kodi
@@ -1803,6 +1807,11 @@ return
 
 #!Enter:: ; Win+Alt+Enter shortcut key
 
+IfNotExist %KodiPath%
+	{	MsgBox, 48 , KodiLauncher, Kodi.exe not found., 3
+		Return
+	}
+	
 LaunchApplication(KodiPath)
 ;Sleep, 2000
 WinActivate, ahk_class Kodi
