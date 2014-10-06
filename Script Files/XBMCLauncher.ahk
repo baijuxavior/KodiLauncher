@@ -497,7 +497,7 @@ return
 MenuStartKodiHandler:
 {
 IfNotExist %KodiPath%
-	{	MsgBox, 48 , KodiLauncher, Kodi.exe not found., 3
+	{	MsgBox, 48 , KodiLauncher, Cannot find file "%KodiPath%", 5
 		Return
 	}
 LaunchApplication(KodiPath)
@@ -1812,7 +1812,7 @@ return
 #!Enter:: ; Win+Alt+Enter shortcut key
 
 IfNotExist %KodiPath%
-	{	MsgBox, 48 , KodiLauncher, Kodi.exe not found., 3
+	{	MsgBox, 48 , KodiLauncher, Cannot find file "%KodiPath%", 5
 		Return
 	}
 	
