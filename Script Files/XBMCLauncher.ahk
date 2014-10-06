@@ -178,7 +178,7 @@ Menu, Tray, add, Kodi Exit Settings, :KodiExitSubMenu
 Menu, KodiPathSubMenu, add, Set Kodi Path, MenuSetKodiPathHandler
 Menu, KodiPathSubMenu, add, Set XBMConiMON Path, MenuSetXBMConiMONPathHandler
 Menu, KodiPathSubMenu, add, Set iMON Path, MenuSetiMONPathHandler
-Menu, Tray, add, Kodi Path Settings, :KodiPathSubMenu
+Menu, Tray, add, Kodi/iMON Path Settings, :KodiPathSubMenu
 
 Menu, Tray, add ;add separator
 shell := RTrim(ShellName, "`.exe")
