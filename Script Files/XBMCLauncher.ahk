@@ -957,10 +957,11 @@ SaveSettings(SettingsName, Value)
 KeepFocus()
 {
 		
-	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1)
+	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1 or WinActive("ahk_class XBMC"))
 		{
-		FocusCount = 0
-		return
+
+			FocusCount = 0
+			return
 		}
 		
 	FocusCount := FocusCount + 1
@@ -992,10 +993,10 @@ SendFocus() ;focus
 		{
 			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel >= 1)
-				IfWinNotActive, ahk_class Kodi ;if Kodi is not active
-				WinActivate, ahk_class Kodi ;activate Kodi
-				{	WinGet, hWnd, ID, ahk_class Kodi
-					WinRestore, ahk_class Kodi
+				IfWinNotActive, ahk_class XBMC ;if Kodi is not active
+				WinActivate, ahk_class XBMC ;activate Kodi
+				{	WinGet, hWnd, ID, ahk_class XBMC
+					WinRestore, ahk_class XBMC
 					DllCall("SetForegroundWindow", UInt, hWnd)
 				}	
 		}
