@@ -2,19 +2,19 @@
  * * * Compile_AHK SETTINGS BEGIN * * *
 
 [AHK2EXE]
-Exe_File=%In_Dir%\RestartXBMC.exe
+Exe_File=%In_Dir%\RestartKodi.exe
 Created_Date=1
 [VERSION]
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
-File_Description=RestartXBMC
-File_Version=4.0.0.0
+File_Description=RestartKodi
+File_Version=1.0.0.0
 Inc_File_Version=0
-Internal_Name=RestartXBMC
+Internal_Name=RestartKodi
 Legal_Copyright=C@P Baiju Xavior
-Original_Filename=RestartXBMC
-Product_Name=RestartXBMC
-Product_Version=4.0.0.0
+Original_Filename=RestartKodi
+Product_Name=RestartKodi
+Product_Version=1.0.0.0
 
 * * * Compile_AHK SETTINGS END * * *
 */
@@ -24,7 +24,7 @@ Product_Version=4.0.0.0
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-RegWrite,reg_sz,HKCU,Software\XBMCLauncher, RestartXBMC, 1
+RegWrite,reg_sz,HKCU,Software\KodiLauncher, RestartKodi, 1
 
 
 
