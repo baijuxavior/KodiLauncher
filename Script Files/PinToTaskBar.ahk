@@ -7,14 +7,14 @@ Created_Date=1
 [VERSION]
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
-File_Description=Create XBMCLauncherGUI  shorcut in Taskbar
-File_Version=4.0.0.0
+File_Description=Create KodiLauncherGUI  shortcut in Taskbar
+File_Version=1.0.0.0
 Inc_File_Version=0
 Internal_Name=PinToTaskbar
 Legal_Copyright=C@P Baiju Xavior
 Original_Filename=PinToTaskbar
 Product_Name=PinToTaskbar
-Product_Version=4.0.0.0
+Product_Version=1.0.0.0
 
 * * * Compile_AHK SETTINGS END * * *
 */
@@ -36,8 +36,8 @@ Const CSIDL_COMMON_PROGRAMS = &H17
 Set objShell = CreateObject("Shell.Application") 
 Set objAllUsersProgramsFolder = objShell.NameSpace(CSIDL_COMMON_PROGRAMS) 
 strAllUsersProgramsPath = objAllUsersProgramsFolder.Self.Path 
-Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\XBMCLauncher") 
-Set objFolderItem = objFolder.ParseName("XBMCLauncherGUI.lnk") 
+Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\KodiLauncher") 
+Set objFolderItem = objFolder.ParseName("KodiLauncherGUI.lnk") 
 Set colVerbs = objFolderItem.Verbs 
 For Each objVerb in colVerbs 
     If Replace(objVerb.name, "&", "") = "Pin to Start Menu" Then objVerb.DoIt 
