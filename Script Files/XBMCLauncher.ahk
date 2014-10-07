@@ -878,7 +878,7 @@ MenuOpenKodiAppFolderHandler:
 	ifexist, %appfolder%
 		run %appfolder%
 	else
-		MsgBox, Folder not found.
+		MsgBox, 48 , KodiLauncher, Folder '%appfolder%' not found., 5
 }
 
 return
@@ -889,7 +889,7 @@ MenuOpenKodiFolderHandler:
 	IfExist, %Kodifolder%
 		run %Kodifolder%
 	else
-		MsgBox, Folder not found.
+		MsgBox, 48 , KodiLauncher, Folder '%Kodifolder%' not found., 5
 }
 
 return
