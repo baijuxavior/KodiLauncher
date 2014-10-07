@@ -993,9 +993,9 @@ SendFocus() ;focus
 		{
 			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel > 0)
-				IfWinNotActive, ahk_class XBMC ;if Kodi is not active
-				WinActivate, ahk_class XBMC ;activate Kodi
-				{	WinGet, hWnd, ID, ahk_class XBMC
+				IfWinNotActive, ahk_pid %ErrorLevel%
+					WinActivate, ahk_pid %ErrorLevel% ;activate Kodi
+				{	WinGet, hWnd, ID, ahk_class XBMC ; this snippet is to focus kodi using handle if the above code didn't work.
 					WinRestore, ahk_class XBMC
 					DllCall("SetForegroundWindow", UInt, hWnd)
 				}	
