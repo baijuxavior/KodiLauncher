@@ -1,4 +1,4 @@
-XBMC-Launcher
+KodiLauncher
 =============
 
-XBMCLauncher - All in One Tool for XBMC to Change Shell, Set Focus and more
+KodiLauncher - All in One Tool for Kodi to Change Shell, Set Focus and more
