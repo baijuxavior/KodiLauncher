@@ -376,7 +376,7 @@ If (StartKodiOnWinLogon = 1 and ReloadKodiLauncher = 0)
 Sleep %StartupDelay%
 LaunchApplication(KodiPath)
 WinWait,Kodi,,2 ; wait 2 seconds
-WinActivate, ahk_class Kodi ; activate and bring to front.
+WinActivate, ahk_class XBMC ; activate and bring to front.
 }
 
 
@@ -445,7 +445,7 @@ WM_POWERBROADCAST(wParam, lParam)
 			
 					Sleep %StartupDelay%
 					;WinWait,Kodi,,6 ; wait 6 seconds
-					WinActivate, ahk_class Kodi ; activate and bring to front.
+					WinActivate, ahk_class XBMC ; activate and bring to front.
 
 					LaunchApplication(KodiPath)
 			
@@ -502,7 +502,7 @@ IfNotExist %KodiPath%
 	}
 LaunchApplication(KodiPath)
 Sleep, 2000
-WinActivate, ahk_class Kodi
+WinActivate, ahk_class XBMC
 FocussedOnce = 0
 }
 return
@@ -1635,8 +1635,8 @@ MonitorCustomShutdown()
 				if (ForceCloseKodi = 1)
 					Process, Close, %ErrorLevel%  
 				else
-					WinClose, ahk_class Kodi
-					WinWaitClose, ahk_class Kodi
+					WinClose, ahk_class XBMC
+					WinWaitClose, ahk_class XBMC
 			}
 			Loop
 			{
@@ -1646,7 +1646,7 @@ MonitorCustomShutdown()
 				{
 					LaunchApplication(KodiPath)
 					Sleep, 2000
-					WinActivate, ahk_class Kodi
+					WinActivate, ahk_class XBMC
 					SaveSettings("RestartKodi", 0)
 					break
 				}
@@ -1765,12 +1765,12 @@ DisableFocusTemporarily()
 return
 
 $!F4:: ;Alt+F4
-IfWinActive, ahk_class Kodi ; check if Kodi.exe is running 
+IfWinActive, ahk_class XBMC ; check if Kodi.exe is running 
 	{
 	Send s
 	return
 	}
-IfWinNotActive, ahk_class KodiLauncher
+IfWinNotActive, ahk_class XBMCLauncher
 	Send !{F4}
 	return	
 
@@ -1818,23 +1818,23 @@ IfNotExist %KodiPath%
 	
 LaunchApplication(KodiPath)
 ;Sleep, 2000
-WinActivate, ahk_class Kodi
+WinActivate, ahk_class XBMC
 FocussedOnce = 0
 LaunchApplication(iMONPath)
 LaunchApplication(XBMConiMONPath)
 Sleep, 1000
-WinActivate, ahk_class Kodi
+WinActivate, ahk_class XBMC
 
-WinGet, Style, Style, ahk_class Kodi
+WinGet, Style, Style, ahk_class XBMC
 	if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
 		Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
 	Return
 
 
 		SetTitleMatchMode 2
-		#IfWinActive Kodi ahk_class Kodi ; Kodi detection for Kodi/GSB Home Screen action.
+		#IfWinActive ahk_class XBMC ; Kodi detection for Kodi/GSB Home Screen action.
 		#!Enter::
-		WinGet, Style, Style, ahk_class Kodi
+		WinGet, Style, Style, ahk_class XBMC
 		if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
 			Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
 		WinMaximize ;Maximize Kodi if Windowed.
