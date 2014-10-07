@@ -8,13 +8,13 @@ Created_Date=1
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
 File_Description=Windows8-Sleep PC
-File_Version=4.0.0.0
+File_Version=1.0.0.0
 Inc_File_Version=0
 Internal_Name=Windows8-Sleep
 Legal_Copyright=C@P Baiju Xavior
 Original_Filename=Windows8-Sleep
 Product_Name=Windows8-Sleep
-Product_Version=4.0.0.0
+Product_Version=1.0.0.0
 [ICONS]
 Icon_1=%In_Dir%\Windows8-Sleep.ico
 

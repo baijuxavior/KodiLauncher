@@ -1,3 +1,3 @@
 import os, subprocess
 
-subprocess.Popen(["RestartXBMC.exe"], shell=False)
+subprocess.Popen(["RestartKodi.exe"], shell=False)

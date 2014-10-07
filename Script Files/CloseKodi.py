@@ -1,3 +1,3 @@
 import os, subprocess
 
-subprocess.Popen(["CloseXBMC.exe"], shell=False)
+subprocess.Popen(["CloseKodi.exe"], shell=False)
