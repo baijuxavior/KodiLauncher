@@ -162,7 +162,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabControl1.Multiline = True
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(933, 242)
+        Me.TabControl1.Size = New System.Drawing.Size(986, 242)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -176,7 +176,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage1.Location = New System.Drawing.Point(4, 24)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage1.Size = New System.Drawing.Size(978, 214)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Startup Settings"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -187,7 +187,7 @@ Partial Class frmXBMCLauncherGUI
         Me.txtStartupDelay.Name = "txtStartupDelay"
         Me.txtStartupDelay.Size = New System.Drawing.Size(73, 23)
         Me.txtStartupDelay.TabIndex = 7
-        Me.ToolTip1.SetToolTip(Me.txtStartupDelay, "Delay before XBMC starts.")
+        Me.ToolTip1.SetToolTip(Me.txtStartupDelay, "Delay before Kodi starts.")
         '
         'Label2
         '
@@ -203,19 +203,19 @@ Partial Class frmXBMCLauncherGUI
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(10, 140)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(134, 15)
+        Me.Label1.Size = New System.Drawing.Size(125, 15)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Delay XBMC startup by"
+        Me.Label1.Text = "Delay Kodi startup by"
         '
         'chkStartXBMCPortable
         '
         Me.chkStartXBMCPortable.AutoSize = True
         Me.chkStartXBMCPortable.Location = New System.Drawing.Point(10, 100)
         Me.chkStartXBMCPortable.Name = "chkStartXBMCPortable"
-        Me.chkStartXBMCPortable.Size = New System.Drawing.Size(189, 19)
+        Me.chkStartXBMCPortable.Size = New System.Drawing.Size(180, 19)
         Me.chkStartXBMCPortable.TabIndex = 2
-        Me.chkStartXBMCPortable.Text = "Start XBMC in Portable Mode"
-        Me.ToolTip1.SetToolTip(Me.chkStartXBMCPortable, "Start XBMC with -P switch.")
+        Me.chkStartXBMCPortable.Text = "Start Kodi in Portable Mode"
+        Me.ToolTip1.SetToolTip(Me.chkStartXBMCPortable, "Start Kodi with -P switch.")
         Me.chkStartXBMCPortable.UseVisualStyleBackColor = True
         '
         'chkStartXBMCatWinResume
@@ -223,10 +223,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartXBMCatWinResume.AutoSize = True
         Me.chkStartXBMCatWinResume.Location = New System.Drawing.Point(10, 60)
         Me.chkStartXBMCatWinResume.Name = "chkStartXBMCatWinResume"
-        Me.chkStartXBMCatWinResume.Size = New System.Drawing.Size(310, 19)
+        Me.chkStartXBMCatWinResume.Size = New System.Drawing.Size(285, 19)
         Me.chkStartXBMCatWinResume.TabIndex = 1
-        Me.chkStartXBMCatWinResume.Text = "Start XBMC when Windows resumes from Suspend"
-        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinResume, "Start XBMC when resuming from Sleep or Hibernation.")
+        Me.chkStartXBMCatWinResume.Text = "Start Kodi when Windows resumes from Sleep"
+        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinResume, "Start Kodi when resuming from Sleep or Hibernation.")
         Me.chkStartXBMCatWinResume.UseVisualStyleBackColor = True
         '
         'chkStartXBMCatWinLogon
@@ -234,10 +234,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartXBMCatWinLogon.AutoSize = True
         Me.chkStartXBMCatWinLogon.Location = New System.Drawing.Point(10, 20)
         Me.chkStartXBMCatWinLogon.Name = "chkStartXBMCatWinLogon"
-        Me.chkStartXBMCatWinLogon.Size = New System.Drawing.Size(213, 19)
+        Me.chkStartXBMCatWinLogon.Size = New System.Drawing.Size(204, 19)
         Me.chkStartXBMCatWinLogon.TabIndex = 0
-        Me.chkStartXBMCatWinLogon.Text = "Start XBMC when Windows starts"
-        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinLogon, "Start XBMC when XBMCLauncher starts at Windows logon.")
+        Me.chkStartXBMCatWinLogon.Text = "Start Kodi when Windows starts"
+        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinLogon, "Start Kodi when KodiLauncher starts at Windows logon.")
         Me.chkStartXBMCatWinLogon.UseVisualStyleBackColor = True
         '
         'TabPage2
@@ -260,10 +260,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkFocusOnce.AutoSize = True
         Me.chkFocusOnce.Location = New System.Drawing.Point(10, 60)
         Me.chkFocusOnce.Name = "chkFocusOnce"
-        Me.chkFocusOnce.Size = New System.Drawing.Size(108, 17)
+        Me.chkFocusOnce.Size = New System.Drawing.Size(117, 19)
         Me.chkFocusOnce.TabIndex = 14
         Me.chkFocusOnce.Text = "Focus Once Only"
-        Me.ToolTip1.SetToolTip(Me.chkFocusOnce, "XBMC is focussed only once after the time specified in 'Focus Delay'.")
+        Me.ToolTip1.SetToolTip(Me.chkFocusOnce, "Kodi is focussed only once after the time specified in 'Focus Delay'.")
         Me.chkFocusOnce.UseVisualStyleBackColor = True
         '
         'txtFocusDelay
@@ -272,7 +272,7 @@ Partial Class frmXBMCLauncherGUI
         Me.txtFocusDelay.Name = "txtFocusDelay"
         Me.txtFocusDelay.Size = New System.Drawing.Size(73, 23)
         Me.txtFocusDelay.TabIndex = 13
-        Me.ToolTip1.SetToolTip(Me.txtFocusDelay, "Delay between focus commands. Focus is sent only if XBMC is inactive.")
+        Me.ToolTip1.SetToolTip(Me.txtFocusDelay, "Delay between focus commands. Focus is sent only if Kodi is inactive.")
         '
         'Label3
         '
@@ -297,10 +297,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkDisableFocus.AutoSize = True
         Me.chkDisableFocus.Location = New System.Drawing.Point(10, 20)
         Me.chkDisableFocus.Name = "chkDisableFocus"
-        Me.chkDisableFocus.Size = New System.Drawing.Size(154, 17)
+        Me.chkDisableFocus.Size = New System.Drawing.Size(174, 19)
         Me.chkDisableFocus.TabIndex = 7
         Me.chkDisableFocus.Text = "Disable Focus Permanently"
-        Me.ToolTip1.SetToolTip(Me.chkDisableFocus, "Disble XBMC from focussing permanently.")
+        Me.ToolTip1.SetToolTip(Me.chkDisableFocus, "Disble Kodi from automatic focussing permanently.")
         Me.chkDisableFocus.UseVisualStyleBackColor = True
         '
         'TabPage3
@@ -312,7 +312,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage3.Location = New System.Drawing.Point(4, 24)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage3.Size = New System.Drawing.Size(978, 214)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Exit Settings"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -338,11 +338,11 @@ Partial Class frmXBMCLauncherGUI
         Me.chkForceCloseXBMC.ForeColor = System.Drawing.Color.Black
         Me.chkForceCloseXBMC.Location = New System.Drawing.Point(10, 117)
         Me.chkForceCloseXBMC.Name = "chkForceCloseXBMC"
-        Me.chkForceCloseXBMC.Size = New System.Drawing.Size(115, 17)
+        Me.chkForceCloseXBMC.Size = New System.Drawing.Size(117, 19)
         Me.chkForceCloseXBMC.TabIndex = 6
-        Me.chkForceCloseXBMC.Text = "Force Close XBMC"
-        Me.ToolTip1.SetToolTip(Me.chkForceCloseXBMC, "Applicable for the custom confluence skin only. XBMC will be force closed when th" & _
-                "e shutown button is clicked.")
+        Me.chkForceCloseXBMC.Text = "Force Close Kodi"
+        Me.ToolTip1.SetToolTip(Me.chkForceCloseXBMC, "Applicable for the custom confluence skin only. Kodi will be force closed when th" & _
+        "e shutown button is clicked.")
         Me.chkForceCloseXBMC.UseVisualStyleBackColor = True
         '
         'rdHibernate
@@ -351,11 +351,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdHibernate.ForeColor = System.Drawing.Color.Black
         Me.rdHibernate.Location = New System.Drawing.Point(10, 75)
         Me.rdHibernate.Name = "rdHibernate"
-        Me.rdHibernate.Size = New System.Drawing.Size(71, 17)
+        Me.rdHibernate.Size = New System.Drawing.Size(81, 19)
         Me.rdHibernate.TabIndex = 2
         Me.rdHibernate.TabStop = True
         Me.rdHibernate.Text = "Hibernate"
-        Me.ToolTip1.SetToolTip(Me.rdHibernate, "XBMC Shutdown button will hibernate the system.")
+        Me.ToolTip1.SetToolTip(Me.rdHibernate, "Kodi Shutdown button will hibernate the system.")
         Me.rdHibernate.UseVisualStyleBackColor = True
         '
         'rdSleep
@@ -364,11 +364,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdSleep.ForeColor = System.Drawing.Color.Black
         Me.rdSleep.Location = New System.Drawing.Point(10, 50)
         Me.rdSleep.Name = "rdSleep"
-        Me.rdSleep.Size = New System.Drawing.Size(52, 17)
+        Me.rdSleep.Size = New System.Drawing.Size(56, 19)
         Me.rdSleep.TabIndex = 1
         Me.rdSleep.TabStop = True
         Me.rdSleep.Text = "Sleep"
-        Me.ToolTip1.SetToolTip(Me.rdSleep, "XBMC Shutdown button will suspend the system.")
+        Me.ToolTip1.SetToolTip(Me.rdSleep, "Kodi Shutdown button will suspend the system.")
         Me.rdSleep.UseVisualStyleBackColor = True
         '
         'rdShutDown
@@ -377,11 +377,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShutDown.ForeColor = System.Drawing.Color.Black
         Me.rdShutDown.Location = New System.Drawing.Point(10, 25)
         Me.rdShutDown.Name = "rdShutDown"
-        Me.rdShutDown.Size = New System.Drawing.Size(73, 17)
+        Me.rdShutDown.Size = New System.Drawing.Size(82, 19)
         Me.rdShutDown.TabIndex = 0
         Me.rdShutDown.TabStop = True
         Me.rdShutDown.Text = "Shutdown"
-        Me.ToolTip1.SetToolTip(Me.rdShutDown, "XBMC Shutdown button will shutdown the system.")
+        Me.ToolTip1.SetToolTip(Me.rdShutDown, "Kodi Shutdown button will shutdown the system.")
         Me.rdShutDown.UseVisualStyleBackColor = True
         '
         'chkStartMetroUI
@@ -389,10 +389,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartMetroUI.AutoSize = True
         Me.chkStartMetroUI.Location = New System.Drawing.Point(10, 100)
         Me.chkStartMetroUI.Name = "chkStartMetroUI"
-        Me.chkStartMetroUI.Size = New System.Drawing.Size(223, 17)
+        Me.chkStartMetroUI.Size = New System.Drawing.Size(250, 19)
         Me.chkStartMetroUI.TabIndex = 4
-        Me.chkStartMetroUI.Text = "Start Metro Start UI when XBMC is closed"
-        Me.ToolTip1.SetToolTip(Me.chkStartMetroUI, "Start Metro UI when XBMC is closed.")
+        Me.chkStartMetroUI.Text = "Start Metro Start UI when Kodi is closed"
+        Me.ToolTip1.SetToolTip(Me.chkStartMetroUI, "Start Metro UI when Kodi is closed.")
         Me.chkStartMetroUI.UseVisualStyleBackColor = True
         Me.chkStartMetroUI.Visible = False
         '
@@ -401,10 +401,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExplorer.AutoSize = True
         Me.chkStartExplorer.Location = New System.Drawing.Point(10, 60)
         Me.chkStartExplorer.Name = "chkStartExplorer"
-        Me.chkStartExplorer.Size = New System.Drawing.Size(242, 17)
+        Me.chkStartExplorer.Size = New System.Drawing.Size(269, 19)
         Me.chkStartExplorer.TabIndex = 3
-        Me.chkStartExplorer.Text = "Start Windows Explorer when XBMC is closed"
-        Me.ToolTip1.SetToolTip(Me.chkStartExplorer, "Start Explorer when XBMC is closed in shell mode.")
+        Me.chkStartExplorer.Text = "Start Windows Explorer when Kodi is closed"
+        Me.ToolTip1.SetToolTip(Me.chkStartExplorer, "Start Explorer when Kodi is closed in shell mode.")
         Me.chkStartExplorer.UseVisualStyleBackColor = True
         '
         'chkCloseXBMCatSleep
@@ -412,10 +412,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkCloseXBMCatSleep.AutoSize = True
         Me.chkCloseXBMCatSleep.Location = New System.Drawing.Point(10, 20)
         Me.chkCloseXBMCatSleep.Name = "chkCloseXBMCatSleep"
-        Me.chkCloseXBMCatSleep.Size = New System.Drawing.Size(182, 17)
+        Me.chkCloseXBMCatSleep.Size = New System.Drawing.Size(194, 19)
         Me.chkCloseXBMCatSleep.TabIndex = 2
-        Me.chkCloseXBMCatSleep.Text = "Close XBMC on System Suspend"
-        Me.ToolTip1.SetToolTip(Me.chkCloseXBMCatSleep, "Force close XBMC during Sleep or Hibernation.")
+        Me.chkCloseXBMCatSleep.Text = "Close Kodi on System Suspend"
+        Me.ToolTip1.SetToolTip(Me.chkCloseXBMCatSleep, "Force close Kodi during Sleep or Hibernation.")
         Me.chkCloseXBMCatSleep.UseVisualStyleBackColor = True
         '
         'TabPage4
@@ -435,9 +435,9 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage4.Location = New System.Drawing.Point(4, 24)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage4.Size = New System.Drawing.Size(978, 214)
         Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "XBMC Path"
+        Me.TabPage4.Text = "Kodi/iMON Path"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
         'lblXBMCPath
@@ -542,9 +542,9 @@ Partial Class frmXBMCLauncherGUI
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(10, 20)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(69, 15)
+        Me.Label5.Size = New System.Drawing.Size(60, 15)
         Me.Label5.TabIndex = 0
-        Me.Label5.Text = "XBMC Path"
+        Me.Label5.Text = "Kodi Path"
         '
         'TabPage9
         '
@@ -568,7 +568,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage9.Location = New System.Drawing.Point(4, 24)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage9.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage9.Size = New System.Drawing.Size(978, 214)
         Me.TabPage9.TabIndex = 8
         Me.TabPage9.Text = "External Players"
         Me.TabPage9.UseVisualStyleBackColor = True
@@ -700,10 +700,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkFocusExternalPlayer.AutoSize = True
         Me.chkFocusExternalPlayer.Location = New System.Drawing.Point(10, 180)
         Me.chkFocusExternalPlayer.Name = "chkFocusExternalPlayer"
-        Me.chkFocusExternalPlayer.Size = New System.Drawing.Size(128, 17)
+        Me.chkFocusExternalPlayer.Size = New System.Drawing.Size(143, 19)
         Me.chkFocusExternalPlayer.TabIndex = 20
         Me.chkFocusExternalPlayer.Text = "Focus External Player"
-        Me.ToolTip1.SetToolTip(Me.chkFocusExternalPlayer, "Focus External Player instead of XBMC.")
+        Me.ToolTip1.SetToolTip(Me.chkFocusExternalPlayer, "Focus External Player instead of Kodi.")
         Me.chkFocusExternalPlayer.UseVisualStyleBackColor = True
         '
         'btnSelectExtPlayer2
@@ -743,7 +743,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage5.Location = New System.Drawing.Point(4, 24)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage5.Size = New System.Drawing.Size(978, 214)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "External Apps Group 1"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -840,10 +840,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps1.AutoSize = True
         Me.chkStartExternalApps1.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps1.Name = "chkStartExternalApps1"
-        Me.chkStartExternalApps1.Size = New System.Drawing.Size(148, 17)
+        Me.chkStartExternalApps1.Size = New System.Drawing.Size(161, 19)
         Me.chkStartExternalApps1.TabIndex = 4
-        Me.chkStartExternalApps1.Text = "Start with XBMCLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps1, "Start the group of applications when XBMCLauncher is started.")
+        Me.chkStartExternalApps1.Text = "Start with KodiLauncher"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps1, "Start the group of applications when KodiLauncher is started.")
         Me.chkStartExternalApps1.UseVisualStyleBackColor = True
         '
         'btnSelectApp2
@@ -860,10 +860,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkPreventFocusExternalApps1.AutoSize = True
         Me.chkPreventFocusExternalApps1.Location = New System.Drawing.Point(10, 180)
         Me.chkPreventFocusExternalApps1.Name = "chkPreventFocusExternalApps1"
-        Me.chkPreventFocusExternalApps1.Size = New System.Drawing.Size(128, 17)
+        Me.chkPreventFocusExternalApps1.Size = New System.Drawing.Size(133, 19)
         Me.chkPreventFocusExternalApps1.TabIndex = 5
-        Me.chkPreventFocusExternalApps1.Text = "Prevent XBMC Focus"
-        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps1, "Prevent XBMC focus when these applications are running.")
+        Me.chkPreventFocusExternalApps1.Text = "Prevent Kodi Focus"
+        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps1, "Prevent Kodi focus when these applications are running.")
         Me.chkPreventFocusExternalApps1.UseVisualStyleBackColor = True
         '
         'btnSelectApp1
@@ -894,7 +894,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage7.Location = New System.Drawing.Point(4, 24)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage7.Size = New System.Drawing.Size(978, 214)
         Me.TabPage7.TabIndex = 6
         Me.TabPage7.Text = "External Apps Group 2"
         Me.TabPage7.UseVisualStyleBackColor = True
@@ -1009,10 +1009,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkPreventFocusExternalApps2.AutoSize = True
         Me.chkPreventFocusExternalApps2.Location = New System.Drawing.Point(10, 180)
         Me.chkPreventFocusExternalApps2.Name = "chkPreventFocusExternalApps2"
-        Me.chkPreventFocusExternalApps2.Size = New System.Drawing.Size(128, 17)
+        Me.chkPreventFocusExternalApps2.Size = New System.Drawing.Size(133, 19)
         Me.chkPreventFocusExternalApps2.TabIndex = 23
-        Me.chkPreventFocusExternalApps2.Text = "Prevent XBMC Focus"
-        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps2, "Prevent XBMC focus when these applications are running.")
+        Me.chkPreventFocusExternalApps2.Text = "Prevent Kodi Focus"
+        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps2, "Prevent Kodi focus when these applications are running.")
         Me.chkPreventFocusExternalApps2.UseVisualStyleBackColor = True
         '
         'chkStartExternalApps2
@@ -1020,10 +1020,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps2.AutoSize = True
         Me.chkStartExternalApps2.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps2.Name = "chkStartExternalApps2"
-        Me.chkStartExternalApps2.Size = New System.Drawing.Size(148, 17)
+        Me.chkStartExternalApps2.Size = New System.Drawing.Size(161, 19)
         Me.chkStartExternalApps2.TabIndex = 22
-        Me.chkStartExternalApps2.Text = "Start with XBMCLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps2, "Start the group of applications when XBMCLauncher is started.")
+        Me.chkStartExternalApps2.Text = "Start with KodiLauncher"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps2, "Start the group of applications when KodiLauncher is started.")
         Me.chkStartExternalApps2.UseVisualStyleBackColor = True
         '
         'TabPage8
@@ -1045,7 +1045,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage8.Location = New System.Drawing.Point(4, 24)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage8.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage8.Size = New System.Drawing.Size(978, 214)
         Me.TabPage8.TabIndex = 7
         Me.TabPage8.Text = "External Apps Group 3"
         Me.TabPage8.UseVisualStyleBackColor = True
@@ -1160,10 +1160,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkPreventFocusExternalApps3.AutoSize = True
         Me.chkPreventFocusExternalApps3.Location = New System.Drawing.Point(10, 180)
         Me.chkPreventFocusExternalApps3.Name = "chkPreventFocusExternalApps3"
-        Me.chkPreventFocusExternalApps3.Size = New System.Drawing.Size(128, 17)
+        Me.chkPreventFocusExternalApps3.Size = New System.Drawing.Size(133, 19)
         Me.chkPreventFocusExternalApps3.TabIndex = 40
-        Me.chkPreventFocusExternalApps3.Text = "Prevent XBMC Focus"
-        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps3, "Prevent XBMC focus when these applications are running.")
+        Me.chkPreventFocusExternalApps3.Text = "Prevent Kodi Focus"
+        Me.ToolTip1.SetToolTip(Me.chkPreventFocusExternalApps3, "Prevent Kodi focus when these applications are running.")
         Me.chkPreventFocusExternalApps3.UseVisualStyleBackColor = True
         '
         'chkStartExternalApps3
@@ -1171,10 +1171,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps3.AutoSize = True
         Me.chkStartExternalApps3.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps3.Name = "chkStartExternalApps3"
-        Me.chkStartExternalApps3.Size = New System.Drawing.Size(148, 17)
+        Me.chkStartExternalApps3.Size = New System.Drawing.Size(161, 19)
         Me.chkStartExternalApps3.TabIndex = 39
-        Me.chkStartExternalApps3.Text = "Start with XBMCLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps3, "Start the group of applications when XBMCLauncher is started.")
+        Me.chkStartExternalApps3.Text = "Start with KodiLauncher"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps3, "Start the group of applications when KodiLauncher is started.")
         Me.chkStartExternalApps3.UseVisualStyleBackColor = True
         '
         'TabPage6
@@ -1183,7 +1183,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage6.Location = New System.Drawing.Point(4, 24)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage6.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage6.Size = New System.Drawing.Size(978, 214)
         Me.TabPage6.TabIndex = 5
         Me.TabPage6.Text = "Shell"
         Me.TabPage6.UseVisualStyleBackColor = True
@@ -1198,7 +1198,7 @@ Partial Class frmXBMCLauncherGUI
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(948, 208)
+        Me.GroupBox3.Size = New System.Drawing.Size(972, 208)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         '
@@ -1225,11 +1225,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShellOthers.AutoSize = True
         Me.rdShellOthers.Location = New System.Drawing.Point(10, 100)
         Me.rdShellOthers.Name = "rdShellOthers"
-        Me.rdShellOthers.Size = New System.Drawing.Size(51, 17)
+        Me.rdShellOthers.Size = New System.Drawing.Size(58, 19)
         Me.rdShellOthers.TabIndex = 2
         Me.rdShellOthers.TabStop = True
         Me.rdShellOthers.Text = "Other"
-        Me.ToolTip1.SetToolTip(Me.rdShellOthers, "Set any other .exe file as shell. XBMCLauncehr will not start.")
+        Me.ToolTip1.SetToolTip(Me.rdShellOthers, "Set any other exe file as shell. KodiLauncher will not start. Use carefully.")
         Me.rdShellOthers.UseVisualStyleBackColor = True
         '
         'rdShellXBMCLauncher
@@ -1237,11 +1237,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShellXBMCLauncher.AutoSize = True
         Me.rdShellXBMCLauncher.Location = New System.Drawing.Point(10, 60)
         Me.rdShellXBMCLauncher.Name = "rdShellXBMCLauncher"
-        Me.rdShellXBMCLauncher.Size = New System.Drawing.Size(100, 17)
+        Me.rdShellXBMCLauncher.Size = New System.Drawing.Size(101, 19)
         Me.rdShellXBMCLauncher.TabIndex = 1
         Me.rdShellXBMCLauncher.TabStop = True
-        Me.rdShellXBMCLauncher.Text = "XBMCLauncher"
-        Me.ToolTip1.SetToolTip(Me.rdShellXBMCLauncher, "Set XBMCLauncher as the shell.")
+        Me.rdShellXBMCLauncher.Text = "KodiLauncher"
+        Me.ToolTip1.SetToolTip(Me.rdShellXBMCLauncher, "Set KodiLauncher as the shell.")
         Me.rdShellXBMCLauncher.UseVisualStyleBackColor = True
         '
         'rdShellWindowsExplorer
@@ -1249,7 +1249,7 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShellWindowsExplorer.AutoSize = True
         Me.rdShellWindowsExplorer.Location = New System.Drawing.Point(10, 20)
         Me.rdShellWindowsExplorer.Name = "rdShellWindowsExplorer"
-        Me.rdShellWindowsExplorer.Size = New System.Drawing.Size(110, 17)
+        Me.rdShellWindowsExplorer.Size = New System.Drawing.Size(126, 19)
         Me.rdShellWindowsExplorer.TabIndex = 0
         Me.rdShellWindowsExplorer.TabStop = True
         Me.rdShellWindowsExplorer.Text = "Windows Explorer"
@@ -1260,7 +1260,7 @@ Partial Class frmXBMCLauncherGUI
         '
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTip1.ToolTipTitle = "XBMCLauncher"
+        Me.ToolTip1.ToolTipTitle = "KodiLauncher"
         '
         'OpenFileDialog1
         '
@@ -1270,7 +1270,7 @@ Partial Class frmXBMCLauncherGUI
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(933, 242)
+        Me.ClientSize = New System.Drawing.Size(986, 242)
         Me.Controls.Add(Me.TabControl1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -1278,7 +1278,7 @@ Partial Class frmXBMCLauncherGUI
         Me.MaximizeBox = False
         Me.Name = "frmXBMCLauncherGUI"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "XBMCLauncher GUI"
+        Me.Text = "KodiLauncher Settings GUI"
         Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)

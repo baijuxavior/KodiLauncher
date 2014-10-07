@@ -1,6 +1,6 @@
 ﻿Public Class frmXBMCLauncherGUI
 
-    Dim RegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\XBMCLauncher"
+    Dim RegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\KodiLauncher"
 
 
 #Region "FORM LOAD EVENTS"
@@ -9,9 +9,9 @@
         On Error GoTo err
 
         'Startup Settings
-        Me.chkStartXBMCatWinLogon.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartXBMCatWinLogon", "1")
-        Me.chkStartXBMCatWinResume.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartXBMCatWinResume", "0")
-        Me.chkStartXBMCPortable.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartXBMCPortable", "0")
+        Me.chkStartXBMCatWinLogon.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartKodiOnWinLogon", "1")
+        Me.chkStartXBMCatWinResume.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartKodiOnWinResume", "0")
+        Me.chkStartXBMCPortable.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartKodiInPortableMode", "0")
         Me.txtStartupDelay.Text = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartupDelay", "0") / 1000
 
         'Focus Settings
@@ -21,8 +21,8 @@
         Me.chkFocusExternalPlayer.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "FocusExternalPlayer", "0")
 
         'Exit Settings
-        Me.chkCloseXBMCatSleep.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "CloseXBMCatSleep", "0")
-        Me.chkForceCloseXBMC.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "ForceCloseXBMC", "0")
+        Me.chkCloseXBMCatSleep.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "CloseKodiOnSleep", "0")
+        Me.chkForceCloseXBMC.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "ForceCloseKodi", "0")
         Me.chkStartExplorer.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartExplorer", "1")
         Me.chkStartMetroUI.Checked = My.Computer.Registry.GetValue(RegistrySettingsPath, "StartMetroUI", "1")
         If My.Computer.Info.OSVersion >= "6.2" Then Me.chkStartMetroUI.Visible = True 'if windows 8
@@ -41,9 +41,9 @@
             Me.rdHibernate.Checked = True
         End If
 
-        'XBMC Path Settings
+        'Kodi Path Settings
 
-        Me.lblXBMCPath.Text = ShrinkPathText(My.Computer.Registry.GetValue(RegistrySettingsPath, "XBMC_Path", ""), lblXBMCPath)
+        Me.lblXBMCPath.Text = ShrinkPathText(My.Computer.Registry.GetValue(RegistrySettingsPath, "Kodi_Path", ""), lblXBMCPath)
         Me.lblXBMConIMONPath.Text = ShrinkPathText(My.Computer.Registry.GetValue(RegistrySettingsPath, "XBMConiMON_Path", ""), lblXBMConIMONPath)
         Me.lbliMONManagerPath.Text = ShrinkPathText(My.Computer.Registry.GetValue(RegistrySettingsPath, "iMON_Path", ""), lbliMONManagerPath)
 
@@ -84,7 +84,7 @@
         Dim Shell As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", "Explorer.exe")
         If Shell.ToLower.Contains("explorer") Then
             Me.rdShellWindowsExplorer.Checked = True
-        ElseIf Shell.Contains("XBMCLauncher.exe") Then
+        ElseIf Shell.Contains("KodiLauncher.exe") Then
             Me.rdShellXBMCLauncher.Checked = True
         Else
             Me.rdShellOthers.Checked = True
@@ -103,20 +103,20 @@ err:
     Private Sub chkStartAtWinLogon_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkStartXBMCatWinLogon.Click
         Dim chk As Integer
         If Me.chkStartXBMCatWinLogon.Checked Then chk = 1 Else chk = 0
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartXBMCatWinLogon", chk, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartKodiOnWinLogon", chk, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 
     Private Sub chkStartAtWinResume_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkStartXBMCatWinResume.Click
         Dim chk As Integer
         If Me.chkStartXBMCatWinResume.Checked Then chk = 1 Else chk = 0
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartXBMCatWinResume", chk, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartKodiOnWinResume", chk, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
     Private Sub chkStartPortable_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkStartXBMCPortable.Click
         Dim chk As Integer
         If Me.chkStartXBMCPortable.Checked Then chk = 1 Else chk = 0
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartXBMCPortable", chk, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "StartKodiInPortableMode", chk, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
     Private Sub txtStartupDelay_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtStartupDelay.TextChanged
@@ -154,14 +154,14 @@ err:
     Private Sub chkCloseXBMC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCloseXBMCatSleep.Click
         Dim chk As Integer
         If Me.chkCloseXBMCatSleep.Checked Then chk = 1 Else chk = 0
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "CloseXBMCatSleep", chk, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "CloseKodiOnSleep", chk, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
 
     Private Sub chkForceCloseXBMC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkForceCloseXBMC.Click
         Dim chk As Integer
         If Me.chkForceCloseXBMC.Checked Then chk = 1 Else chk = 0
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "ForceCloseXBMC", chk, Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "ForceCloseKodi", chk, Microsoft.Win32.RegistryValueKind.String)
     End Sub
 
     Private Sub chkStartExplorer_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkStartExplorer.Click
@@ -191,31 +191,34 @@ err:
 #End Region
 
 
-#Region " XBMC PATH SETTINGS"
+#Region " KODI PATH SETTINGS"
 
     Private Sub btnSelectXBMCPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectXBMCPath.Click
         OpenFileDialog1.Filter = "Executable File|*.exe"
-        OpenFileDialog1.Title = "Select XBMC Path"
+        OpenFileDialog1.Title = "Select Kodi Path"
         OpenFileDialog1.AutoUpgradeEnabled = True
-        Dim xbmcpath As String = My.Computer.Registry.GetValue(RegistrySettingsPath, "XBMC_Path", "")
-        If xbmcpath = "" Then xbmcpath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles & "\XBMC\XBMC.exe"
+        Dim xbmcpath As String = My.Computer.Registry.GetValue(RegistrySettingsPath, "Kodi_Path", "")
+        If xbmcpath = "" Then xbmcpath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles & "\Kodi\Kodi.exe"
         OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.GetParentPath(xbmcpath)
-        OpenFileDialog1.FileName = "XBMC.exe"
+        OpenFileDialog1.FileName = "Kodi.exe"
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
             Application.DoEvents() 'first close the selection window
             xbmcpath = OpenFileDialog1.FileName
-            My.Computer.Registry.SetValue(RegistrySettingsPath, "XBMC_Path", xbmcpath, Microsoft.Win32.RegistryValueKind.String)
+            My.Computer.Registry.SetValue(RegistrySettingsPath, "Kodi_Path", xbmcpath, Microsoft.Win32.RegistryValueKind.String)
             Me.lblXBMCPath.Text = ShrinkPathText(xbmcpath, Me.lblXBMCPath)
         End If
     End Sub
 
     Private Sub btnSelectXBMConIMONPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectXBMConIMONPath.Click
         OpenFileDialog1.Filter = "Executable File|*.exe"
-        OpenFileDialog1.Title = "Select XBMC on iMON Path"
+        OpenFileDialog1.Title = "Select XBMConiMON Path"
         OpenFileDialog1.AutoUpgradeEnabled = True
         Dim xbmconimonpath As String = My.Computer.Registry.GetValue(RegistrySettingsPath, "XBMConiMON_Path", "")
-        If xbmconimonpath = "" Then xbmconimonpath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles & "\XBMC\XBMC.exe"
-        OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.GetParentPath(xbmconimonpath)
+        If xbmconimonpath = "" Then
+            OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
+        Else
+            OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.GetParentPath(xbmconimonpath)
+        End If
         OpenFileDialog1.FileName = "xbmconimon.exe"
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
@@ -232,7 +235,12 @@ err:
         OpenFileDialog1.AutoUpgradeEnabled = True
         Dim imonpath As String = My.Computer.Registry.GetValue(RegistrySettingsPath, "iMON_Path", "")
         If imonpath = "" Then imonpath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles & "\SoundGraph\iMON\iMON.exe"
-        OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.GetParentPath(imonpath)
+        If My.Computer.FileSystem.FileExists(imonpath) = False Then
+            OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.ProgramFiles
+        Else
+            OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.GetParentPath(imonpath)
+        End If
+
         OpenFileDialog1.FileName = "iMON.exe"
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then 'if ok button clicked
@@ -245,7 +253,7 @@ err:
 
 
     Private Sub btnClearXBMCPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClearXBMCPath.Click
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "XBMC_Path", "", Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "Kodi_Path", "", Microsoft.Win32.RegistryValueKind.String)
         Me.lblXBMCPath.Text = ""
     End Sub
 
@@ -259,7 +267,7 @@ err:
         Me.lbliMONManagerPath.Text = ""
     End Sub
 
-   
+
 
 #End Region
 
@@ -659,7 +667,7 @@ err:
     End Sub
 
     Private Sub rdShellLauncher_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdShellXBMCLauncher.Click
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", My.Application.Info.DirectoryPath & "\XBMCLauncher.exe", Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", My.Application.Info.DirectoryPath & "\KodiLauncher.exe", Microsoft.Win32.RegistryValueKind.String)
         Me.lblShell.Text = ""
     End Sub
 
@@ -687,8 +695,8 @@ err:
 
     Private Sub EndApplication() Handles MyBase.FormClosed
         On Error Resume Next
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "ReloadXBMCLauncher", 1, Microsoft.Win32.RegistryValueKind.String)
-        Shell(My.Application.Info.DirectoryPath & "\XBMCLauncher.exe /r", AppWinStyle.Hide) 'Reload XBMCLauncher script.
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "ReloadKodiLauncher", 1, Microsoft.Win32.RegistryValueKind.String)
+        Shell(My.Application.Info.DirectoryPath & "\KodiLauncher.exe /r", AppWinStyle.Hide) 'Reload KodiLauncher script.
     End Sub
 
     Public Function ShrinkPathText(ByVal sString As String, ByVal lbl As Label) As String

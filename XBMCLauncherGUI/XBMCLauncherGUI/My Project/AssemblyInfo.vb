@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("XBMCLauncherGUI")> 
-<Assembly: AssemblyDescription("GUI for XBMCLauncher Settings")> 
+<Assembly: AssemblyTitle("KodiLauncherSettingsGUI")> 
+<Assembly: AssemblyDescription("GUI for KodiLauncher Settings")> 
 <Assembly: AssemblyCompany("baijuxavior@gmail.com")> 
-<Assembly: AssemblyProduct("XBMCLauncherGUI")> 
+<Assembly: AssemblyProduct("KodiLauncherSettingsGUI")> 
 <Assembly: AssemblyCopyright("Copyright © Baiju Xavior")> 
 <Assembly: AssemblyTrademark("")> 
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.5.0.0")> 
-<Assembly: AssemblyFileVersion("1.5.0.0")> 
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> 
