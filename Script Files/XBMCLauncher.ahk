@@ -428,7 +428,7 @@ WM_POWERBROADCAST(wParam, lParam)
 		if (CloseKodiOnSleep = 1) ; force close Kodi
 		{
 			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
-			If (ErrorLevel >= 1) ; If it is running 
+			If (ErrorLevel > 0) ; If it is running 
 			{ 
 				Process, Close, %ErrorLevel%  
 				Process, WaitClose, %ErrorLevel% 
@@ -992,7 +992,7 @@ SendFocus() ;focus
 	if (ExternalPlayerRunning = 0)
 		{
 			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 				IfWinNotActive, ahk_class XBMC ;if Kodi is not active
 				WinActivate, ahk_class XBMC ;activate Kodi
 				{	WinGet, hWnd, ID, ahk_class XBMC
@@ -1003,7 +1003,7 @@ SendFocus() ;focus
 		else ;if externalplayer is running
 			if (FocusExternalPlayer = 1)
 			{	Process, exist, %ExternalPlayerName%
-				If (ErrorLevel >= 1)
+				If (ErrorLevel > 0)
 					IfWinNotActive, ahk_pid %ErrorLevel%
 						WinActivate, ahk_pid %ErrorLevel%
 			}
@@ -1163,7 +1163,7 @@ DisableFocusOnExternalPlayer()
 	{
 		SplitPath, ExternalPlayer1, playername
 		Process, exist, %playername%
-		If (ErrorLevel >= 1)
+		If (ErrorLevel > 0)
 			{	ExternalPlayerRunning = 1
 				ExternalPlayerName = %playername%
 			}
@@ -1173,7 +1173,7 @@ DisableFocusOnExternalPlayer()
 	{
 		SplitPath, ExternalPlayer2, playername
 		Process, exist, %playername%
-		If (ErrorLevel >= 1)
+		If (ErrorLevel > 0)
 			{	ExternalPlayerRunning = 1
 				ExternalPlayerName = %playername%
 			}
@@ -1183,7 +1183,7 @@ DisableFocusOnExternalPlayer()
 	{
 		SplitPath, ExternalPlayer3, playername
 		Process, exist, %playername%
-		If (ErrorLevel >= 1)
+		If (ErrorLevel > 0)
 			{	ExternalPlayerRunning = 1
 				ExternalPlayerName = %playername%
 			}
@@ -1193,7 +1193,7 @@ DisableFocusOnExternalPlayer()
 	{
 		SplitPath, ExternalPlayer4, playername
 		Process, exist, %playername%
-		If (ErrorLevel >= 1)
+		If (ErrorLevel > 0)
 			{	ExternalPlayerRunning = 1
 				ExternalPlayerName = %playername%
 			}
@@ -1205,7 +1205,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App1, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1213,7 +1213,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App2, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1221,7 +1221,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App3, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 	}
@@ -1233,7 +1233,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App4, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1241,7 +1241,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App5, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1249,7 +1249,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App6, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 	}
@@ -1261,7 +1261,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App7, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1269,7 +1269,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App8, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 		
@@ -1277,7 +1277,7 @@ DisableFocusOnExternalPlayer()
 			{SplitPath, App9, appsname
 			;if (appsname <> "")
 			Process, exist, %appsname%
-			If (ErrorLevel >= 1)
+			If (ErrorLevel > 0)
 			ExternalPlayerRunning = 1
 			}
 	}
