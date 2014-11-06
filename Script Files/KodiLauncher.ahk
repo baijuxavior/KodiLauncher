@@ -1625,10 +1625,9 @@ MonitorCustomShutdown()
 	}
 	
 	RestartKodi := GetSettings("RestartKodi", 0)
-	;MsgBox %RestartKodi%
+	
 	If(RestartKodi = 1)
 		{
-				;MsgBox sss	
 			Process, Exist, Kodi.exe ; check if Kodi.exe is running 
 			If (ErrorLevel > 0) ; If it is running 
 			{
@@ -1652,7 +1651,7 @@ MonitorCustomShutdown()
 				}
 			
 			}
-				
+						
 		}
 }
 
