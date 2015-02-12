@@ -24,7 +24,7 @@ Product_Version=1.0.0.0
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-RegWrite,reg_sz,HKCU,Software\KodiLauncher, RestartKodi, 1
+RegWrite,reg_sz,HKCU,Software\Launcher4Kodi, RestartKodi, 1
 
 
 

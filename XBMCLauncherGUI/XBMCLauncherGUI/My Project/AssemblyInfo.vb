@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("KodiLauncherSettingsGUI")> 
-<Assembly: AssemblyDescription("GUI for KodiLauncher Settings")> 
+<Assembly: AssemblyTitle("Launcher4KodiSettingsGUI")> 
+<Assembly: AssemblyDescription("GUI for Launcher4Kodi Settings")> 
 <Assembly: AssemblyCompany("baijuxavior@gmail.com")> 
-<Assembly: AssemblyProduct("KodiLauncherSettingsGUI")> 
+<Assembly: AssemblyProduct("Launcher4KodiSettingsGUI")> 
 <Assembly: AssemblyCopyright("Copyright © Baiju Xavior")> 
 <Assembly: AssemblyTrademark("")> 
 

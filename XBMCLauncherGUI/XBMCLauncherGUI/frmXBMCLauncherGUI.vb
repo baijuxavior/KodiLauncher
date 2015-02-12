@@ -1,6 +1,6 @@
 ﻿Public Class frmXBMCLauncherGUI
 
-    Dim RegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\KodiLauncher"
+    Dim RegistrySettingsPath As String = "HKEY_CURRENT_USER\Software\Launcher4Kodi"
 
 
 #Region "FORM LOAD EVENTS"
@@ -84,7 +84,7 @@
         Dim Shell As String = My.Computer.Registry.GetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", "Explorer.exe")
         If Shell.ToLower.Contains("explorer") Then
             Me.rdShellWindowsExplorer.Checked = True
-        ElseIf Shell.Contains("KodiLauncher.exe") Then
+        ElseIf Shell.Contains("Launcher4Kodi.exe") Then
             Me.rdShellXBMCLauncher.Checked = True
         Else
             Me.rdShellOthers.Checked = True
@@ -667,7 +667,7 @@ err:
     End Sub
 
     Private Sub rdShellLauncher_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rdShellXBMCLauncher.Click
-        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", My.Application.Info.DirectoryPath & "\KodiLauncher.exe", Microsoft.Win32.RegistryValueKind.String)
+        My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "Shell", My.Application.Info.DirectoryPath & "\Launcher4Kodi.exe", Microsoft.Win32.RegistryValueKind.String)
         Me.lblShell.Text = ""
     End Sub
 
@@ -695,8 +695,8 @@ err:
 
     Private Sub EndApplication() Handles MyBase.FormClosed
         On Error Resume Next
-        My.Computer.Registry.SetValue(RegistrySettingsPath, "ReloadKodiLauncher", 1, Microsoft.Win32.RegistryValueKind.String)
-        Shell(My.Application.Info.DirectoryPath & "\KodiLauncher.exe /r", AppWinStyle.Hide) 'Reload KodiLauncher script.
+        My.Computer.Registry.SetValue(RegistrySettingsPath, "ReloadLauncher4Kodi", 1, Microsoft.Win32.RegistryValueKind.String)
+        Shell(My.Application.Info.DirectoryPath & "\Launcher4Kodi.exe /r", AppWinStyle.Hide) 'Reload Launcher4Kodi script.
     End Sub
 
     Public Function ShrinkPathText(ByVal sString As String, ByVal lbl As Label) As String

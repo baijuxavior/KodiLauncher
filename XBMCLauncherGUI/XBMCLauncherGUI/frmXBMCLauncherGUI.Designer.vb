@@ -237,7 +237,7 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartXBMCatWinLogon.Size = New System.Drawing.Size(204, 19)
         Me.chkStartXBMCatWinLogon.TabIndex = 0
         Me.chkStartXBMCatWinLogon.Text = "Start Kodi when Windows starts"
-        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinLogon, "Start Kodi when KodiLauncher starts at Windows logon.")
+        Me.ToolTip1.SetToolTip(Me.chkStartXBMCatWinLogon, "Start Kodi when Launcher4Kodi starts at Windows logon.")
         Me.chkStartXBMCatWinLogon.UseVisualStyleBackColor = True
         '
         'TabPage2
@@ -250,7 +250,7 @@ Partial Class frmXBMCLauncherGUI
         Me.TabPage2.Location = New System.Drawing.Point(4, 24)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(925, 214)
+        Me.TabPage2.Size = New System.Drawing.Size(978, 214)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Focus Settings"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -840,10 +840,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps1.AutoSize = True
         Me.chkStartExternalApps1.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps1.Name = "chkStartExternalApps1"
-        Me.chkStartExternalApps1.Size = New System.Drawing.Size(161, 19)
+        Me.chkStartExternalApps1.Size = New System.Drawing.Size(168, 19)
         Me.chkStartExternalApps1.TabIndex = 4
-        Me.chkStartExternalApps1.Text = "Start with KodiLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps1, "Start the group of applications when KodiLauncher is started.")
+        Me.chkStartExternalApps1.Text = "Start with Launcher4Kodi"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps1, "Start the group of applications when Launcher4Kodi is started.")
         Me.chkStartExternalApps1.UseVisualStyleBackColor = True
         '
         'btnSelectApp2
@@ -1020,10 +1020,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps2.AutoSize = True
         Me.chkStartExternalApps2.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps2.Name = "chkStartExternalApps2"
-        Me.chkStartExternalApps2.Size = New System.Drawing.Size(161, 19)
+        Me.chkStartExternalApps2.Size = New System.Drawing.Size(168, 19)
         Me.chkStartExternalApps2.TabIndex = 22
-        Me.chkStartExternalApps2.Text = "Start with KodiLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps2, "Start the group of applications when KodiLauncher is started.")
+        Me.chkStartExternalApps2.Text = "Start with Launcher4Kodi"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps2, "Start the group of applications when Launcher4Kodi is started.")
         Me.chkStartExternalApps2.UseVisualStyleBackColor = True
         '
         'TabPage8
@@ -1171,10 +1171,10 @@ Partial Class frmXBMCLauncherGUI
         Me.chkStartExternalApps3.AutoSize = True
         Me.chkStartExternalApps3.Location = New System.Drawing.Point(10, 140)
         Me.chkStartExternalApps3.Name = "chkStartExternalApps3"
-        Me.chkStartExternalApps3.Size = New System.Drawing.Size(161, 19)
+        Me.chkStartExternalApps3.Size = New System.Drawing.Size(168, 19)
         Me.chkStartExternalApps3.TabIndex = 39
-        Me.chkStartExternalApps3.Text = "Start with KodiLauncher"
-        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps3, "Start the group of applications when KodiLauncher is started.")
+        Me.chkStartExternalApps3.Text = "Start with Launcher4Kodi"
+        Me.ToolTip1.SetToolTip(Me.chkStartExternalApps3, "Start the group of applications when Launcher4Kodi is started.")
         Me.chkStartExternalApps3.UseVisualStyleBackColor = True
         '
         'TabPage6
@@ -1229,7 +1229,7 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShellOthers.TabIndex = 2
         Me.rdShellOthers.TabStop = True
         Me.rdShellOthers.Text = "Other"
-        Me.ToolTip1.SetToolTip(Me.rdShellOthers, "Set any other exe file as shell. KodiLauncher will not start. Use carefully.")
+        Me.ToolTip1.SetToolTip(Me.rdShellOthers, "Set any other exe file as shell. Launcher4Kodi will not start. Use carefully.")
         Me.rdShellOthers.UseVisualStyleBackColor = True
         '
         'rdShellXBMCLauncher
@@ -1237,11 +1237,11 @@ Partial Class frmXBMCLauncherGUI
         Me.rdShellXBMCLauncher.AutoSize = True
         Me.rdShellXBMCLauncher.Location = New System.Drawing.Point(10, 60)
         Me.rdShellXBMCLauncher.Name = "rdShellXBMCLauncher"
-        Me.rdShellXBMCLauncher.Size = New System.Drawing.Size(101, 19)
+        Me.rdShellXBMCLauncher.Size = New System.Drawing.Size(108, 19)
         Me.rdShellXBMCLauncher.TabIndex = 1
         Me.rdShellXBMCLauncher.TabStop = True
-        Me.rdShellXBMCLauncher.Text = "KodiLauncher"
-        Me.ToolTip1.SetToolTip(Me.rdShellXBMCLauncher, "Set KodiLauncher as the shell.")
+        Me.rdShellXBMCLauncher.Text = "Launcher4Kodi"
+        Me.ToolTip1.SetToolTip(Me.rdShellXBMCLauncher, "Set Launcher4Kodi as the shell.")
         Me.rdShellXBMCLauncher.UseVisualStyleBackColor = True
         '
         'rdShellWindowsExplorer
@@ -1260,7 +1260,7 @@ Partial Class frmXBMCLauncherGUI
         '
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTip1.ToolTipTitle = "KodiLauncher"
+        Me.ToolTip1.ToolTipTitle = "Launcher4Kodi"
         '
         'OpenFileDialog1
         '
@@ -1278,7 +1278,7 @@ Partial Class frmXBMCLauncherGUI
         Me.MaximizeBox = False
         Me.Name = "frmXBMCLauncherGUI"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "KodiLauncher Settings GUI"
+        Me.Text = "Launcher4Kodi Settings GUI"
         Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)

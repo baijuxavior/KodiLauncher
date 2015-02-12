@@ -1,2 +1,2 @@
-KodiLauncher
+Launcher4Kodi
 ============

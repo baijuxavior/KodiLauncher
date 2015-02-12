@@ -2,22 +2,22 @@
  * * * Compile_AHK SETTINGS BEGIN * * *
 
 [AHK2EXE]
-Exe_File=%In_Dir%\KodiLauncher.exe
+Exe_File=%In_Dir%\Launcher4Kodi.exe
 Created_Date=1
 [VERSION]
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
-File_Description=KodiLauncher
+File_Description=Launcher4Kodi
 File_Version=1.0.0.0
 Inc_File_Version=0
-Internal_Name=KodiLauncher
+Internal_Name=Launcher4Kodi
 Legal_Copyright=C@P Baiju Xavior
-Original_Filename=KodiLauncher
-Product_Name=KodiLauncher
+Original_Filename=Launcher4Kodi
+Product_Name=Launcher4Kodi
 Product_Version=1.0.0.0
 [ICONS]
-Icon_1=%In_Dir%\KodiLauncher.ico
-Icon_2=%In_Dir%\KodiLauncher.ico
+Icon_1=%In_Dir%\Launcher4Kodi.ico
+Icon_2=%In_Dir%\Launcher4Kodi.ico
 
 * * * Compile_AHK SETTINGS END * * *
 */
@@ -29,7 +29,7 @@ Icon_2=%In_Dir%\KodiLauncher.ico
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-DllCall("CreateMutex", "uint", 0, "int", false, "str", "kodi_launcher_mutex") ; create a mutex to find whether the application is already running while installation.
+DllCall("CreateMutex", "uint", 0, "int", false, "str", "launcher4kodi_mutex") ; create a mutex to find whether the application is already running while installation.
 
 ProgFiles32() ;get 32 bit program files folder
 {
@@ -70,7 +70,7 @@ global StartupDelay := GetSettings("StartupDelay", 0)
 global StartKodiOnWinLogon := GetSettings("StartKodiOnWinLogon", 1)
 global StartKodiOnWinResume := GetSettings("StartKodiOnWinResume", 0)
 global StartKodiInPortableMode := GetSettings("StartKodiInPortableMode", 0)
-global BreakFocus = 0 ; break focus while setting KodiLauncher settings
+global BreakFocus = 0 ; break focus while setting Launcher4Kodi settings
 
 
 global KodiPath := GetSettings("Kodi_Path", ProgFiles . "\Kodi\Kodi.exe")
@@ -104,8 +104,8 @@ Global App9 := GetSettings("App9_Path", "")
 global StartApps3 := GetSettings("StartApps3", 0)
 global PreventFocusApps3 := GetSettings("PreventFocusApps3", 0)
 
-global ReloadKodiLauncher := GetSettings("ReloadKodiLauncher", 0)
-SaveSettings("ReloadKodiLauncher", 0)
+global ReloadLauncher4Kodi := GetSettings("ReloadLauncher4Kodi", 0)
+SaveSettings("ReloadLauncher4Kodi", 0)
 SaveSettings("RestartKodi", 0)
 
 global ShellName
@@ -119,9 +119,9 @@ RegRead, ShellName, HKCU, Software\Microsoft\Windows NT\CurrentVersion\Winlogon,
 
 fdelay := FocusDelay // 1000 ; variable to show menu name with delay
 sdelay := StartupDelay // 1000
-IfExist, %A_WorkingDir%\KodiLauncher.ico
-Menu, Tray, Icon, %A_WorkingDir%\KodiLauncher.ico ; create tray icon.
-Menu, Tray, Tip, KodiLauncher V%AppVersion% `nRight click to view menu
+IfExist, %A_WorkingDir%\Launcher4Kodi.ico
+Menu, Tray, Icon, %A_WorkingDir%\Launcher4Kodi.ico ; create tray icon.
+Menu, Tray, Tip, Launcher4Kodi V%AppVersion% `nRight click to view menu
 Menu, Tray, add, Start Kodi [Win+Alt+Enter], MenuStartKodiHandler
 Menu, Tray, add, Force Close Kodi Now, MenuForceCloseKodiNow
 Menu, Tray, add ;add separator
@@ -226,8 +226,8 @@ if (AppName = "")
 	AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 3 - %AppName%, MenuSetApp3Handler
 
-Menu, ExternalAppsSubMenu, add, Start First Group Applications with KodiLauncher, MenuStartApps1Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start First Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, Start First Group Applications with Launcher4Kodi, MenuStartApps1Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start First Group Applications with Launcher4Kodi
 Menu, ExternalAppsSubMenu, add, First Group Apps Prevent Kodi Focus, MenuApps1PreventFocusHandler
 Menu, ExternalAppsSubMenu, UnCheck, First Group Apps Prevent Kodi Focus
 
@@ -248,8 +248,8 @@ if (AppName = "")
     AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 6 - %AppName%, MenuSetApp6Handler
 
-Menu, ExternalAppsSubMenu, add, Start Second Group Applications with KodiLauncher, MenuStartApps2Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start Second Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, Start Second Group Applications with Launcher4Kodi, MenuStartApps2Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start Second Group Applications with Launcher4Kodi
 Menu, ExternalAppsSubMenu, add, Second Group Apps Prevent Kodi Focus, MenuApps2PreventFocusHandler
 Menu, ExternalAppsSubMenu, UnCheck, Second Group Apps Prevent Kodi Focus
 
@@ -270,8 +270,8 @@ if (AppName = "")
     AppName = Not Set
 Menu, ExternalAppsSubMenu, add, Set Application 9 - %AppName%, MenuSetApp9Handler
 
-Menu, ExternalAppsSubMenu, add, Start Third Group Applications with KodiLauncher, MenuStartApps3Handler
-Menu, ExternalAppsSubMenu, UnCheck, Start Third Group Applications with KodiLauncher
+Menu, ExternalAppsSubMenu, add, Start Third Group Applications with Launcher4Kodi, MenuStartApps3Handler
+Menu, ExternalAppsSubMenu, UnCheck, Start Third Group Applications with Launcher4Kodi
 Menu, ExternalAppsSubMenu, add, Third Group Apps Prevent Kodi Focus, MenuApps3PreventFocusHandler
 Menu, ExternalAppsSubMenu, UnCheck, Third Group Apps Prevent Kodi Focus
 
@@ -282,12 +282,12 @@ Menu, Tray, add, External Applications, :ExternalAppsSubMenu
 Menu, FolderSubMenu, add, Open Kodi Programs Folder, MenuOpenKodiFolderHandler
 Menu, FolderSubMenu, add, Open Kodi Application Data Folder, MenuOpenKodiAppFolderHandler
 Menu, FolderSubMenu, add
-Menu, FolderSubMenu, add, Open KodiLauncher Programs Folder, MenuOpenKodiLauncherFolderHandler
-Menu, FolderSubMenu, add, Open KodiLauncher Settings in Regedit, MenuOpenKodiLauncherSettingsHandler
+Menu, FolderSubMenu, add, Open Launcher4Kodi Programs Folder, MenuOpenLauncher4KodiFolderHandler
+Menu, FolderSubMenu, add, Open Launcher4Kodi Settings in Regedit, MenuOpenLauncher4KodiSettingsHandler
 Menu, Tray, add, Application Folders, :FolderSubMenu
 Menu, Tray, add
 Menu, Tray, add, Turn off Display [Win+F11], MenuTurnOffDisplay
-Menu, Tray, add, About KodiLauncher, MenuAboutHandler
+Menu, Tray, add, About Launcher4Kodi, MenuAboutHandler
 Menu, Tray, add
 Menu, tray, NoStandard
 Menu, tray, Standard
@@ -320,19 +320,19 @@ if (FocusExternalPlayer = 1)
 	Menu, ExternalPlayerSubMenu, Check, Focus External Player
 
 if (StartApps1 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start First Group Applications with KodiLauncher
+	Menu, ExternalAppsSubMenu, Check, Start First Group Applications with Launcher4Kodi
 
 if (PreventFocusApps1 = 1)
 	Menu, ExternalAppsSubMenu, Check, First Group Apps Prevent Kodi Focus
 
 if (StartApps2 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start Second Group Applications with KodiLauncher
+	Menu, ExternalAppsSubMenu, Check, Start Second Group Applications with Launcher4Kodi
 
 if (PreventFocusApps2 = 1)
 	Menu, ExternalAppsSubMenu, Check, Second Group Apps Prevent Kodi Focus
 
 if (StartApps3 = 1)
-	Menu, ExternalAppsSubMenu, Check, Start Third Group Applications with KodiLauncher
+	Menu, ExternalAppsSubMenu, Check, Start Third Group Applications with Launcher4Kodi
 
 if (PreventFocusApps3 = 1)
 	Menu, ExternalAppsSubMenu, Check, Third Group Apps Prevent Kodi Focus
@@ -370,43 +370,43 @@ IfNotExist, %KodiPath% ; if Kodi.exe is not found, prompt to select Kodi.exe man
 
 ; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 			LAUNCH APPLICATIONS 		<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-If (StartKodiOnWinLogon = 1 and ReloadKodiLauncher = 0)
+If (StartKodiOnWinLogon = 1 and ReloadLauncher4Kodi = 0)
 {
 	
 Sleep %StartupDelay%
 LaunchApplication(KodiPath)
 WinWait,Kodi,,2 ; wait 2 seconds
-WinActivate, ahk_class XBMC ; activate and bring to front.
+WinActivate, ahk_class Kodi ; activate and bring to front.
 }
 
 
-If (StartApps1 = 1 and ReloadKodiLauncher = 0)
+If (StartApps1 = 1 and ReloadLauncher4Kodi = 0)
 {
 LaunchApplication(App1)
 LaunchApplication(App2)
 LaunchApplication(App3)
 }
 
-If (StartApps2 = 1 and ReloadKodiLauncher = 0)
+If (StartApps2 = 1 and ReloadLauncher4Kodi = 0)
 {
 LaunchApplication(App4)
 LaunchApplication(App5)
 LaunchApplication(App6)
 }
 
-If (StartApps3 = 1 and ReloadKodiLauncher = 0)
+If (StartApps3 = 1 and ReloadLauncher4Kodi = 0)
 {
 LaunchApplication(App7)
 LaunchApplication(App8)
 LaunchApplication(App9)
 }
 
-if (ReloadKodiLauncher = 0)
+if (ReloadLauncher4Kodi = 0)
 	{LaunchApplication(iMONPath)
 	LaunchApplication(XBMConiMONPath)
 	}
 
-ReloadKodiLauncher = 0
+ReloadLauncher4Kodi = 0
 
 	; >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>	 START Kodi ON WINDOWS RESUME FROM HIBERNATION OR SLEEP 	<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -445,7 +445,7 @@ WM_POWERBROADCAST(wParam, lParam)
 			
 					Sleep %StartupDelay%
 					;WinWait,Kodi,,6 ; wait 6 seconds
-					WinActivate, ahk_class XBMC ; activate and bring to front.
+					WinActivate, ahk_class Kodi ; activate and bring to front.
 
 					LaunchApplication(KodiPath)
 			
@@ -497,12 +497,12 @@ return
 MenuStartKodiHandler:
 {
 IfNotExist %KodiPath%
-	{	MsgBox, 48 , KodiLauncher, Cannot find file "%KodiPath%", 5
+	{	MsgBox, 48 , Launcher4Kodi, Cannot find file "%KodiPath%", 5
 		Return
 	}
 LaunchApplication(KodiPath)
 Sleep, 2000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 FocussedOnce = 0
 }
 return
@@ -532,11 +532,11 @@ return
 
 MenuShowSettingsGUI:
 BreakFocus = 1
-IfNotExist %A_ScriptDir%\KodiLauncherGUI.exe
-	{	MsgBox, 48 , KodiLauncher, Settings GUI not found., 3
+IfNotExist %A_ScriptDir%\Launcher4KodiGUI.exe
+	{	MsgBox, 48 , Launcher4Kodi, Settings GUI not found., 3
 		Return
 	}
-run %A_ScriptDir%\KodiLauncherGUI.exe	
+run %A_ScriptDir%\Launcher4KodiGUI.exe	
 return
 
 MenuStartKodiAtWindowsLogonHandler:
@@ -878,7 +878,7 @@ MenuOpenKodiAppFolderHandler:
 	ifexist, %appfolder%
 		run %appfolder%
 	else
-		MsgBox, 48 , KodiLauncher, Folder '%appfolder%' not found., 5
+		MsgBox, 48 , Launcher4Kodi, Folder '%appfolder%' not found., 5
 }
 
 return
@@ -889,13 +889,13 @@ MenuOpenKodiFolderHandler:
 	IfExist, %Kodifolder%
 		run %Kodifolder%
 	else
-		MsgBox, 48 , KodiLauncher, Folder '%Kodifolder%' not found., 5
+		MsgBox, 48 , Launcher4Kodi, Folder '%Kodifolder%' not found., 5
 }
 
 return
 
 
-MenuOpenKodiLauncherFolderHandler:
+MenuOpenLauncher4KodiFolderHandler:
 
 {
 	run %A_ScriptDir%
@@ -904,9 +904,9 @@ MenuOpenKodiLauncherFolderHandler:
 return
 
 
-MenuOpenKodiLauncherSettingsHandler:
+MenuOpenLauncher4KodiSettingsHandler:
 {
-	RegWrite, REG_SZ, HKCU, Software\Microsoft\Windows\CurrentVersion\Applets\Regedit, LastKey, HKEY_CURRENT_USER\Software\KodiLauncher
+	RegWrite, REG_SZ, HKCU, Software\Microsoft\Windows\CurrentVersion\Applets\Regedit, LastKey, HKEY_CURRENT_USER\Software\Launcher4Kodi
 	Run, Regedit.exe
 }
 return
@@ -922,7 +922,7 @@ return
 MenuAboutHandler:
 {
 	BreakFocus = 1
-MsgBox KodiLauncher %AppVersion% `n`nAn application to customize your Kodi HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
+MsgBox Launcher4Kodi %AppVersion% `n`nAn application to customize your Kodi HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
 }
 BreakFocus = 0
 return
@@ -939,7 +939,7 @@ return
 
 GetSettings(SettingsName, DefaultValue) ;Get settings from registry 
 {
-	RegRead, result, HKCU, Software\KodiLauncher, %SettingsName%
+	RegRead, result, HKCU, Software\Launcher4Kodi, %SettingsName%
 	if (result = "")
 		return %DefaultValue%
 	else
@@ -949,7 +949,7 @@ GetSettings(SettingsName, DefaultValue) ;Get settings from registry
 
 SaveSettings(SettingsName, Value)
 {
-	RegWrite,reg_sz,HKCU,Software\KodiLauncher, %SettingsName%, %Value%
+	RegWrite,reg_sz,HKCU,Software\Launcher4Kodi, %SettingsName%, %Value%
 }
 
 
@@ -957,7 +957,7 @@ SaveSettings(SettingsName, Value)
 KeepFocus()
 {
 		
-	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1 or WinActive("ahk_class XBMC"))
+	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1 or WinActive("ahk_class Kodi"))
 		{
 
 			FocusCount = 0
@@ -995,8 +995,8 @@ SendFocus() ;focus
 			If (ErrorLevel > 0)
 				IfWinNotActive, ahk_pid %ErrorLevel%
 					WinActivate, ahk_pid %ErrorLevel% ;activate Kodi
-				{	WinGet, hWnd, ID, ahk_class XBMC ; this snippet is to focus kodi using handle if the above code didn't work.
-					WinRestore, ahk_class XBMC
+				{	WinGet, hWnd, ID, ahk_class Kodi ; this snippet is to focus kodi using handle if the above code didn't work.
+					WinRestore, ahk_class Kodi
 					DllCall("SetForegroundWindow", UInt, hWnd)
 				}	
 		}
@@ -1018,7 +1018,7 @@ SetFocusDelay() ;function to Change Focus Delay
 	if currentdelay is not number 
 		currentdelay = 5
 	
-	InputBox, Delay, KodiLauncher - Specify Time Delay, Specify the delay between refocussing of Kodi in seconds. `n `nEnter '0' seconds to prevent refocus permanently., , , , , , , , %currentdelay%
+	InputBox, Delay, Launcher4Kodi - Specify Time Delay, Specify the delay between refocussing of Kodi in seconds. `n `nEnter '0' seconds to prevent refocus permanently., , , , , , , , %currentdelay%
 
 	If ErrorLevel ; If cancel was pressed
 		{
@@ -1358,7 +1358,7 @@ SetStartMetroUI()
 
 SetStartApps1()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start First Group Applications with KodiLauncher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start First Group Applications with Launcher4Kodi
 	if (StartApps1 = 0)
 		StartApps1 = 1 ;enable. 
 	else
@@ -1369,7 +1369,7 @@ SetStartApps1()
 
 SetStartApps2()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start Second Group Applications with KodiLauncher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start Second Group Applications with Launcher4Kodi
 	if (StartApps2 = 0)
 		StartApps2 = 1 ;enable. 
 	else
@@ -1381,7 +1381,7 @@ SetStartApps2()
 
 SetStartApps3()
 {
-	menu, ExternalAppsSubMenu, ToggleCheck, Start Third Group Applications with KodiLauncher
+	menu, ExternalAppsSubMenu, ToggleCheck, Start Third Group Applications with Launcher4Kodi
 	if (StartApps3 = 0)
 		StartApps3 = 1 ;enable. 
 	else
@@ -1499,7 +1499,7 @@ ChangeShell()
 	global SelectedShellName := ShellName
 	SplitPath, ShellName, ShellName
 		global OtherShellName = "Other Shell"
-	If(ShellName != "KodiLauncher.exe" and ShellName != "Explorer.exe" and ShellName != "Explorer")
+	If(ShellName != "Launcher4Kodi.exe" and ShellName != "Explorer.exe" and ShellName != "Explorer")
 	{	
 		OtherShellName := RTrim(ShellName, "`.exe")
 		;MsgBox %ShellName%
@@ -1514,7 +1514,7 @@ ChangeShell()
 		
 	Gui, Add, GroupBox, x1 y4 w460 h111 +Center, Change Windows Shell
 	Gui, Add, Radio,  % ( Shelln = "Explorer" ? "Checked" : "" ) " x10 y40 w70 h30 vSH1" , Explorer
-	Gui, Add, Radio,  % ( Shelln = "KodiLauncher" ? "Checked" : "" ) " x100 y40 w100 h30 vSH2" , KodiLauncher
+	Gui, Add, Radio,  % ( Shelln = "Launcher4Kodi" ? "Checked" : "" ) " x100 y40 w100 h30 vSH2" , Launcher4Kodi
 	Gui, Add, Radio,  % ( Shelln = OtherShellName ? "Checked" : "" ) " x230 y40 w130 h30 vSH3" , %OtherShellName%
 	Gui, Add, Button, x380 y40 w70 h30 , Select
 	Gui, Add, Button, x180 y78 w100 h30 , Save
@@ -1544,8 +1544,8 @@ ChangeShell()
 	  shelln = Explorer
 	  }
    If SH2
-      {Result = %A_WorkingDir%\KodiLauncher.exe
-      shelln = KodiLauncher
+      {Result = %A_WorkingDir%\Launcher4Kodi.exe
+      shelln = Launcher4Kodi
 	  }
 	  
 	If SH3
@@ -1634,8 +1634,8 @@ MonitorCustomShutdown()
 				if (ForceCloseKodi = 1)
 					Process, Close, %ErrorLevel%  
 				else
-					WinClose, ahk_class XBMC
-					WinWaitClose, ahk_class XBMC
+					WinClose, ahk_class Kodi
+					WinWaitClose, ahk_class Kodi
 			}
 			Loop
 			{
@@ -1645,7 +1645,7 @@ MonitorCustomShutdown()
 				{
 					LaunchApplication(KodiPath)
 					Sleep, 2000
-					WinActivate, ahk_class XBMC
+					WinActivate, ahk_class Kodi
 					SaveSettings("RestartKodi", 0)
 					break
 				}
@@ -1719,7 +1719,7 @@ SetStartupDelay()
 	if currentstartupdelay is not number 
 		currentstartupdelay = 0
 	
-	InputBox, StartDelay, KodiLauncher - Specify Startup Delay, Specify the delay  in seconds for Kodi to start., , , , , , , , %currentstartupdelay%
+	InputBox, StartDelay, Launcher4Kodi - Specify Startup Delay, Specify the delay  in seconds for Kodi to start., , , , , , , , %currentstartupdelay%
 
 	If ErrorLevel ; If cancel was pressed
 		{
@@ -1764,12 +1764,12 @@ DisableFocusTemporarily()
 return
 
 $!F4:: ;Alt+F4
-IfWinActive, ahk_class XBMC ; check if Kodi.exe is running 
+IfWinActive, ahk_class Kodi ; check if Kodi.exe is running 
 	{
 	Send s
 	return
 	}
-IfWinNotActive, ahk_class XBMCLauncher
+IfWinNotActive, ahk_class Launcher4Kodi
 	Send !{F4}
 	return	
 
@@ -1801,11 +1801,11 @@ Process, Exist, explorer.exe ; check if explorer.exe is running
 return
 
 #S:: ;show settings gui
-IfNotExist %A_ScriptDir%\KodiLauncherGUI.exe
-	{	MsgBox, 48 , KodiLauncher, Settings GUI not found., 3
+IfNotExist %A_ScriptDir%\Launcher4KodiGUI.exe
+	{	MsgBox, 48 , Launcher4Kodi, Settings GUI not found., 3
 		Return
 	}
-run %A_ScriptDir%\KodiLauncherGUI.exe
+run %A_ScriptDir%\Launcher4KodiGUI.exe
 return
 
 ^F4:: ; Ctrl+F4
@@ -1817,29 +1817,29 @@ return
 #!Enter:: ; Win+Alt+Enter shortcut key
 
 IfNotExist %KodiPath%
-	{	MsgBox, 48 , KodiLauncher, Cannot find file "%KodiPath%", 5
+	{	MsgBox, 48 , Launcher4Kodi, Cannot find file "%KodiPath%", 5
 		Return
 	}
 	
 LaunchApplication(KodiPath)
 ;Sleep, 2000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 FocussedOnce = 0
 LaunchApplication(iMONPath)
 LaunchApplication(XBMConiMONPath)
 Sleep, 1000
-WinActivate, ahk_class XBMC
+WinActivate, ahk_class Kodi
 
-WinGet, Style, Style, ahk_class XBMC
+WinGet, Style, Style, ahk_class Kodi
 	if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
 		Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
 	Return
 
 
 		SetTitleMatchMode 2
-		#IfWinActive ahk_class XBMC ; Kodi detection for Kodi/GSB Home Screen action.
+		#IfWinActive ahk_class Kodi ; Kodi detection for Kodi/GSB Home Screen action.
 		#!Enter::
-		WinGet, Style, Style, ahk_class XBMC
+		WinGet, Style, Style, ahk_class Kodi
 		if (Style & 0xC00000)  ;Detects if Kodi has a title bar.
 			Send {VKDC}  ;Maximize Kodi to fullscreen mode if its in a window mode.
 		WinMaximize ;Maximize Kodi if Windowed.

@@ -8,9 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{648B439F-8B82-4232-87A1-6EF27FBEC3B0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>XBMCLauncherGUI.My.MyApplication</StartupObject>
-    <RootNamespace>XBMCLauncherGUI</RootNamespace>
-    <AssemblyName>KodiLauncherGUI</AssemblyName>
+    <StartupObject>Launcher4KodiGUI.My.MyApplication</StartupObject>
+    <RootNamespace>Launcher4KodiGUI</RootNamespace>
+    <AssemblyName>Launcher4KodiGUI</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -38,7 +38,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>KodiLauncherGUI.xml</DocumentationFile>
+    <DocumentationFile>Launcher4KodiGUI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -48,7 +48,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>KodiLauncherGUI.xml</DocumentationFile>
+    <DocumentationFile>Launcher4KodiGUI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>

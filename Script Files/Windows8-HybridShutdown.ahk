@@ -30,7 +30,7 @@ global ForceCloseKodi := GetSettings("ForceCloseKodi", 0)
 
 GetSettings(SettingsName, DefaultValue) ;Get settings from registry 
 {
-	RegRead, result, HKCU, Software\KodiLauncher, %SettingsName%
+	RegRead, result, HKCU, Software\Launcher4Kodi, %SettingsName%
 	if (result = "")
 		return %DefaultValue%
 	else

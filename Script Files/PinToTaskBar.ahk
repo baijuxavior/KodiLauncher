@@ -7,7 +7,7 @@ Created_Date=1
 [VERSION]
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
-File_Description=Create KodiLauncherGUI  shortcut in Taskbar
+File_Description=Create Launcher4KodiGUI  shortcut in Taskbar
 File_Version=1.0.0.0
 Inc_File_Version=0
 Internal_Name=PinToTaskbar
@@ -36,8 +36,8 @@ Const CSIDL_COMMON_PROGRAMS = &H17
 Set objShell = CreateObject("Shell.Application") 
 Set objAllUsersProgramsFolder = objShell.NameSpace(CSIDL_COMMON_PROGRAMS) 
 strAllUsersProgramsPath = objAllUsersProgramsFolder.Self.Path 
-Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\KodiLauncher") 
-Set objFolderItem = objFolder.ParseName("KodiLauncherGUI.lnk") 
+Set objFolder = objShell.Namespace(strAllUsersProgramsPath & "\Launcher4Kodi") 
+Set objFolderItem = objFolder.ParseName("Launcher4KodiGUI.lnk") 
 Set colVerbs = objFolderItem.Verbs 
 For Each objVerb in colVerbs 
     If Replace(objVerb.name, "&", "") = "Pin to Start Menu" Then objVerb.DoIt 
