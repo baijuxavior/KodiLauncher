@@ -1808,6 +1808,12 @@ IfNotExist %A_ScriptDir%\KodiLauncherGUI.exe
 run %A_ScriptDir%\KodiLauncherGUI.exe
 return
 
+^F4:: ; Ctrl+F4
+ Process, Exist, Kodi.exe ; check if Kodi.exe is running 
+ If (ErrorLevel > 0) ; If it is running 
+     Process, Close, %ErrorLevel%
+ return	
+
 #!Enter:: ; Win+Alt+Enter shortcut key
 
 IfNotExist %KodiPath%
@@ -1840,5 +1846,5 @@ WinGet, Style, Style, ahk_class XBMC
 		send, ^!{VK74} ; if Kodi is Active (GSB Home Jump will activate)
 		Return
 		
-		
+	
 		
