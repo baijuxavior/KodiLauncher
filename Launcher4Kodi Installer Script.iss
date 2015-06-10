@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Launcher4Kodi"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "baijuxavior@gmail.com"
 #define MyAppExeName "Launcher4Kodi.exe"
 
@@ -13,13 +13,13 @@
 AppId={{56C60B55-3F11-456C-A6EA-B401F7CFA763}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-VersionInfoProductVersion=1.0
-VersionInfoVersion=1.0
+VersionInfoProductVersion=1.1
+VersionInfoVersion=1.1
 AppPublisher={#MyAppPublisher}
 AppMutex=launcher4kodi_mutex
 DefaultDirName={pf32}\Launcher4Kodi
 DefaultGroupName=Launcher4Kodi
-OutputBaseFilename=Launcher4Kodi V1.0
+OutputBaseFilename=Launcher4Kodi V1.1
 Compression=lzma
 SolidCompression=yes
 OutputDir=.
@@ -127,11 +127,11 @@ var
   sAppIDKodiLauncher := '{F4A80E18-9F0A-4743-8253-D4E5135E75BD}';
   sPrevVersionKodiLauncher := GetVersionInstalled( sAppIDKodiLauncher );
 
-  if ( sPrevVersion = '1.0' ) then
-    if MsgBox ('Launcher4Kodi V1.0 is already installed. Do you want to install it again?', mbInformation, MB_yesno) = idyes then
+  if ( sPrevVersion = '1.1' ) then
+    if MsgBox ('Launcher4Kodi V1.1 is already installed. Do you want to install it again?', mbInformation, MB_yesno) = idyes then
         Result:= true
 
-  if ( sPrevVersion > '1.0' ) then
+  if ( sPrevVersion > '1.1' ) then
         if MsgBox ('A higher version Launcher4Kodi V' + sPrevVersion + ' is already installed. Press Yes to uninstall it or No to exit the setup.', mbInformation, MB_yesno) = idno then
         Result:= false
        else
@@ -151,8 +151,12 @@ var
               Result:= true
           end;
 
+  if ( sPrevVersion < '1.1' ) then
+    Result := true;
+
   if ( sPrevVersion = '' ) then
     Result := true;
+
  end;
 
 

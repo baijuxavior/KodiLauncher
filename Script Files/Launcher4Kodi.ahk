@@ -8,13 +8,13 @@ Created_Date=1
 Set_Version_Info=1
 Company_Name=baijuxavior@gmail.com
 File_Description=Launcher4Kodi
-File_Version=1.0.0.0
+File_Version=1.1.0.0
 Inc_File_Version=0
 Internal_Name=Launcher4Kodi
 Legal_Copyright=C@P Baiju Xavior
 Original_Filename=Launcher4Kodi
 Product_Name=Launcher4Kodi
-Product_Version=1.0.0.0
+Product_Version=1.1.0.0
 [ICONS]
 Icon_1=%In_Dir%\Launcher4Kodi.ico
 Icon_2=%In_Dir%\Launcher4Kodi.ico
@@ -46,7 +46,7 @@ ProgFiles32() ;get 32 bit program files folder
 objWMIService := ComObjGet("winmgmts:{impersonationLevel=impersonate}!\\" A_ComputerName "\root\cimv2")
 For objOperatingSystem in objWMIService.ExecQuery("Select * from Win32_OperatingSystem")
 Global OSVersion := 	objOperatingSystem.Version
-global AppVersion = 1.0
+global AppVersion = 1.1
 
 Global ProgFiles := ProgFiles32() ;Program files path
 global FocusDelay := GetSettings("FocusDelay", 10000)
@@ -922,7 +922,7 @@ return
 MenuAboutHandler:
 {
 	BreakFocus = 1
-MsgBox Launcher4Kodi %AppVersion% `n`nAn application to customize your Kodi HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
+MsgBox Launcher4Kodi V %AppVersion% `n`nAn application to customize your Kodi HTPC. `nDesigned and programmed by baijuxavior@gmail.com`n`n *********************************************************`n`nSpecial credits: `n`n  'EliteGamer360' for GSB code. `n  'Snood' for additional apps support and winkey programming.
 }
 BreakFocus = 0
 return
