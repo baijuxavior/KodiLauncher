@@ -123,7 +123,7 @@ IfExist, %A_WorkingDir%\Launcher4Kodi.ico
 Menu, Tray, Icon, %A_WorkingDir%\Launcher4Kodi.ico ; create tray icon.
 Menu, Tray, Tip, Launcher4Kodi V%AppVersion% `nRight click to view menu
 Menu, Tray, add, Start Kodi [Win+Alt+Enter], MenuStartKodiHandler
-Menu, Tray, add, Force Close Kodi Now [Ctrl+F4], MenuForceCloseKodiNow
+Menu, Tray, add, Force Close Kodi Now, MenuForceCloseKodiNow
 Menu, Tray, add ;add separator
 Menu, Tray, add, Start Explorer [Win+E], MenuStartExplorer
 Menu, Tray, add, Show Settings GUI [Win+S], MenuShowSettingsGUI
@@ -956,24 +956,10 @@ SaveSettings(SettingsName, Value)
 
 KeepFocus()
 {
-	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1)
+		
+	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1 or WinActive("ahk_class Kodi"))
 		{
-			FocusCount = 0
-			return
-		}
-	
-	if (FocusExternalPlayer = 1)
-		{
-			Process, exist, %ExternalPlayerName%
-			If (ErrorLevel > 0)
-				{IfWinActive, ahk_pid %ErrorLevel% ;if external player is active
-					{FocusCount = 0
-					return
-					}
-				}
-		}
-	else if (WinActive("ahk_class Kodi"))
-		{
+
 			FocusCount = 0
 			return
 		}
