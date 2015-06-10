@@ -956,10 +956,24 @@ SaveSettings(SettingsName, Value)
 
 KeepFocus()
 {
-		
-	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1 or WinActive("ahk_class Kodi"))
+	if (FocusDelay = 0 or DisableFocusTemporarily = 1 or DisableFocusPermanently = 1 or BreakFocus = 1)
 		{
-
+			FocusCount = 0
+			return
+		}
+	
+	if (FocusExternalPlayer = 1)
+		{
+			Process, exist, %ExternalPlayerName%
+			If (ErrorLevel > 0)
+				{IfWinActive, ahk_pid %ErrorLevel% ;if external player is active
+					{FocusCount = 0
+					return
+					}
+				}
+		}
+	else if (WinActive("ahk_class Kodi"))
+		{
 			FocusCount = 0
 			return
 		}
